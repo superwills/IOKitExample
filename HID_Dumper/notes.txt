@@ -1,0 +1,47 @@
+// You can't GET these properties from the device, they are 0. set in an elt.
+//page = IOHIDDeviceGetPropertyAsInt( dev, kIOHIDDeviceUsagePageKey );
+//usage = IOHIDDeviceGetPropertyAsInt( dev, kIOHIDDeviceUsageKey );
+//printf( "%s has page=%d, usage=%d\n", name.c_str(), page, usage );
+
+
+if( page == kHIDPage_GenericDesktop )
+{
+ switch( usage )
+ {
+ case kHIDUsage_GD_Mouse:
+   deviceType = DeviceTypes::Mouse;
+   break;
+ case kHIDUsage_GD_Keyboard:
+   deviceType = DeviceTypes::Keyboard;
+   break;
+ case kHIDUsage_GD_GamePad:
+   deviceType = DeviceTypes::Gamepad;
+   break;
+ case kHIDUsage_GD_Joystick:
+   deviceType = DeviceTypes::Joystick;
+   break;
+ }
+}
+else printf( "`%s` Not generic desktop device!\n", name.c_str() );
+
+
+
+/*! @typedef IOHIDReportCallback
+    @discussion Type and arguments of callout C function that is used when a HID report completion routine is called.
+    @param context void * pointer to your data, often a pointer to an object.
+    @param result Completion result of desired operation.
+    @param refcon void * pointer to more data.
+    @param sender Interface instance sending the completion routine.
+    @param type The type of the report that was completed.
+    @param reportID The ID of the report that was completed.
+    @param report Pointer to the buffer containing the contents of the report.
+    @param reportLength Size of the buffer received upon completion.
+*/
+
+
+HID Class Device Interface Guide
+https://developer.apple.com/library/content/documentation/DeviceDrivers/Conceptual/HID/new_api_10_5/tn2187.html
+Game Controller Programming Guide
+https://developer.apple.com/library/content/documentation/ServicesDiscovery/Conceptual/GameControllerPG/Introduction/Introduction.html
+
+

@@ -1,0 +1,291 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		97B7C2A417345F0100564D07 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B7C2A217345EEF00564D07 /* IOKit.framework */; };
+		97F7DE8717345E7D001DAEBC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F7DE8617345E7D001DAEBC /* CoreFoundation.framework */; };
+		97F7DE8A17345E7D001DAEBC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97F7DE8917345E7D001DAEBC /* main.cpp */; };
+		9F04CFC51E6BAC2A001835B2 /* HIDManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F04CFC41E6BAC2A001835B2 /* HIDManager.cpp */; };
+		9F04CFC91E6BAD6A001835B2 /* DeviceType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F04CFC71E6BAD6A001835B2 /* DeviceType.cpp */; };
+		9F04CFCC1E6BAD73001835B2 /* IOElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F04CFCA1E6BAD73001835B2 /* IOElement.cpp */; };
+		9F04CFCF1E6BAEDC001835B2 /* IODevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F04CFCD1E6BAEDC001835B2 /* IODevice.cpp */; };
+		9F268011190403B20048F0EC /* cf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F268010190403B20048F0EC /* cf.cpp */; };
+		9F268014190406680048F0EC /* ioHID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F268013190406680048F0EC /* ioHID.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		97F7DE8117345E7D001DAEBC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		97B7C2A217345EEF00564D07 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		97F7DE8317345E7D001DAEBC /* HID_Dumper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HID_Dumper; sourceTree = BUILT_PRODUCTS_DIR; };
+		97F7DE8617345E7D001DAEBC /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		97F7DE8917345E7D001DAEBC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9F04CFC31E6BAC1C001835B2 /* HIDManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HIDManager.h; path = HID_Dumper/HIDManager.h; sourceTree = "<group>"; };
+		9F04CFC41E6BAC2A001835B2 /* HIDManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HIDManager.cpp; path = HID_Dumper/HIDManager.cpp; sourceTree = "<group>"; };
+		9F04CFC61E6BACE9001835B2 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		9F04CFC71E6BAD6A001835B2 /* DeviceType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DeviceType.cpp; path = HID_Dumper/DeviceType.cpp; sourceTree = "<group>"; };
+		9F04CFC81E6BAD6A001835B2 /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceType.h; path = HID_Dumper/DeviceType.h; sourceTree = "<group>"; };
+		9F04CFCA1E6BAD73001835B2 /* IOElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IOElement.cpp; path = HID_Dumper/IOElement.cpp; sourceTree = "<group>"; };
+		9F04CFCB1E6BAD73001835B2 /* IOElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOElement.h; path = HID_Dumper/IOElement.h; sourceTree = "<group>"; };
+		9F04CFCD1E6BAEDC001835B2 /* IODevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IODevice.cpp; path = HID_Dumper/IODevice.cpp; sourceTree = "<group>"; };
+		9F04CFCE1E6BAEDC001835B2 /* IODevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IODevice.h; path = HID_Dumper/IODevice.h; sourceTree = "<group>"; };
+		9F26800F190403760048F0EC /* cf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cf.h; sourceTree = "<group>"; };
+		9F268010190403B20048F0EC /* cf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cf.cpp; sourceTree = "<group>"; };
+		9F268012190406310048F0EC /* ioHID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ioHID.h; sourceTree = "<group>"; };
+		9F268013190406680048F0EC /* ioHID.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ioHID.cpp; sourceTree = "<group>"; };
+		9FBAD593190579AC00DE933C /* notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = notes.txt; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		97F7DE8017345E7D001DAEBC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97F7DE8717345E7D001DAEBC /* CoreFoundation.framework in Frameworks */,
+				97B7C2A417345F0100564D07 /* IOKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		97F7DE7A17345E7D001DAEBC = {
+			isa = PBXGroup;
+			children = (
+				97F7DE8817345E7D001DAEBC /* HID_Dumper */,
+				97F7DE8517345E7D001DAEBC /* Frameworks */,
+				97F7DE8417345E7D001DAEBC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		97F7DE8417345E7D001DAEBC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				97F7DE8317345E7D001DAEBC /* HID_Dumper */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		97F7DE8517345E7D001DAEBC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				97F7DE8617345E7D001DAEBC /* CoreFoundation.framework */,
+				97B7C2A217345EEF00564D07 /* IOKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		97F7DE8817345E7D001DAEBC /* HID_Dumper */ = {
+			isa = PBXGroup;
+			children = (
+				9F268015190408050048F0EC /* util */,
+				9F04CFD01E6BAFFD001835B2 /* IODevice */,
+				9F04CFC61E6BACE9001835B2 /* main.h */,
+				97F7DE8917345E7D001DAEBC /* main.cpp */,
+				9FBAD593190579AC00DE933C /* notes.txt */,
+			);
+			path = HID_Dumper;
+			sourceTree = "<group>";
+		};
+		9F04CFD01E6BAFFD001835B2 /* IODevice */ = {
+			isa = PBXGroup;
+			children = (
+				9F04CFC31E6BAC1C001835B2 /* HIDManager.h */,
+				9F04CFC41E6BAC2A001835B2 /* HIDManager.cpp */,
+				9F04CFC81E6BAD6A001835B2 /* DeviceType.h */,
+				9F04CFC71E6BAD6A001835B2 /* DeviceType.cpp */,
+				9F04CFCE1E6BAEDC001835B2 /* IODevice.h */,
+				9F04CFCD1E6BAEDC001835B2 /* IODevice.cpp */,
+				9F04CFCB1E6BAD73001835B2 /* IOElement.h */,
+				9F04CFCA1E6BAD73001835B2 /* IOElement.cpp */,
+			);
+			name = IODevice;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		9F268015190408050048F0EC /* util */ = {
+			isa = PBXGroup;
+			children = (
+				9F26800F190403760048F0EC /* cf.h */,
+				9F268010190403B20048F0EC /* cf.cpp */,
+				9F268012190406310048F0EC /* ioHID.h */,
+				9F268013190406680048F0EC /* ioHID.cpp */,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		97F7DE8217345E7D001DAEBC /* HID_Dumper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97F7DE8F17345E7D001DAEBC /* Build configuration list for PBXNativeTarget "HID_Dumper" */;
+			buildPhases = (
+				97F7DE7F17345E7D001DAEBC /* Sources */,
+				97F7DE8017345E7D001DAEBC /* Frameworks */,
+				97F7DE8117345E7D001DAEBC /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HID_Dumper;
+			productName = HID_Dumper;
+			productReference = 97F7DE8317345E7D001DAEBC /* HID_Dumper */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		97F7DE7B17345E7D001DAEBC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Apple Inc.";
+			};
+			buildConfigurationList = 97F7DE7E17345E7D001DAEBC /* Build configuration list for PBXProject "HID_Dumper" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 97F7DE7A17345E7D001DAEBC;
+			productRefGroup = 97F7DE8417345E7D001DAEBC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				97F7DE8217345E7D001DAEBC /* HID_Dumper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		97F7DE7F17345E7D001DAEBC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97F7DE8A17345E7D001DAEBC /* main.cpp in Sources */,
+				9F04CFC91E6BAD6A001835B2 /* DeviceType.cpp in Sources */,
+				9F04CFCC1E6BAD73001835B2 /* IOElement.cpp in Sources */,
+				9F268014190406680048F0EC /* ioHID.cpp in Sources */,
+				9F268011190403B20048F0EC /* cf.cpp in Sources */,
+				9F04CFC51E6BAC2A001835B2 /* HIDManager.cpp in Sources */,
+				9F04CFCF1E6BAEDC001835B2 /* IODevice.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		97F7DE8D17345E7D001DAEBC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		97F7DE8E17345E7D001DAEBC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		97F7DE9017345E7D001DAEBC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		97F7DE9117345E7D001DAEBC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		97F7DE7E17345E7D001DAEBC /* Build configuration list for PBXProject "HID_Dumper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97F7DE8D17345E7D001DAEBC /* Debug */,
+				97F7DE8E17345E7D001DAEBC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		97F7DE8F17345E7D001DAEBC /* Build configuration list for PBXNativeTarget "HID_Dumper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97F7DE9017345E7D001DAEBC /* Debug */,
+				97F7DE9117345E7D001DAEBC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 97F7DE7B17345E7D001DAEBC /* Project object */;
+}
