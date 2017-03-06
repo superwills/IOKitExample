@@ -17,14 +17,16 @@ string CFGetType( long typeId )
 string CFStringGetAsString( CFStringRef cfStr )
 {
   string buf;
-  if( !cfStr ) return buf;
+  if( !cfStr ) {
+    buf = "<< empty >>";
+    return buf;
+  }
   long len = CFStringGetLength(cfStr);
   buf.resize( len+1,0 );
   if( !CFStringGetCString( (CFStringRef)cfStr,
     &buf[0], buf.size(),
     kCFStringEncodingMacRoman) )
-    puts( "Couldn't copy string" );
-  printf( "Str: %s\n", buf.c_str() );
+    puts( "CFStringGetAsString: Couldn't copy string" );
   return buf;
 }
 

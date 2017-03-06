@@ -8,8 +8,8 @@
 using namespace std;
 
 #define skip continue
-#define skipIf(x) if(x) continue
-#define skipIfNot(x) if(!x) continue
+#define DESTROY(x) if(x) { delete x; x=0; }
+#define DESTROY_VECTOR(v) for( int i = 0; i < v.size(); i++ ) { DESTROY(v[i]); } v.clear();
 #define IOCHECK(v,s) ioCheck(v,s,__LINE__)
 
 template <typename T> struct CCFArray

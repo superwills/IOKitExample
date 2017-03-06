@@ -13,15 +13,15 @@ struct DeviceProperties
   int page;   // kHIDPage_KeyboardOrKeypad, kHIDPage_Button
   int usage;  // GenericDesktop Page: kHIDUsage_GD_Mouse, kHIDUsage_GD_GamePad
   
-  void print()
+  void print() const
   {
-    printf( "product=`%s` by manufacturer=`%s`\n"
-      "transport=%s category=%s\n"
-      "vendor=%s vendorId=%s\n"
-      "productId=%s versionNumber=%s\n"
-      "serialNumber=%s versionNumber=%s\n"
-      "standardType=%s locationId=%s\n"
-      "page=%d usage=%d\n",
+    printf( "Product=%s BY Manufacturer=%s\n"
+      "  transport=%s\n  category=%s\n"
+      "  vendor=%s\n  vendorId=%s\n"
+      "  productId=%s\n  versionNumber=%s\n"
+      "  serialNumber=%s\n  versionNumber=%s\n"
+      "  standardType=%s\n  locationId=%s\n"
+      "  page=%d\n  usage=%d\n",
       product.c_str(), manufacturer.c_str(),
       transport.c_str(), category.c_str(),
       vendorId.c_str(), vendorIdSource.c_str(),
@@ -47,13 +47,16 @@ struct IODevice
   
   IODevice();
   IODevice( IOHIDDeviceRef iDevice );
+  ~IODevice();
   
   static IODevice* Make( IOHIDDeviceRef iDevice );
   // bang the device to tell if its working or not
   inline bool operator!(){ return !device; }
   
-  void dumpCollection( string collName, vector<IOElement>& coll );
+  void dumpCollection( string collectionName, const vector<IOElement>& coll );
+  void readProperties();
   void readElements();
+  
   void check( vector<IOElement> & elts );
   void check();
 };

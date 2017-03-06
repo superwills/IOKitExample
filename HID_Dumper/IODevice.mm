@@ -6,53 +6,90 @@ IODevice::IODevice() : device( 0 ){}
 IODevice::IODevice( IOHIDDeviceRef iDevice ) :
   device( iDevice )
 {
-  if( device )
+  if( !device )
   {
-    IOHIDDeviceScheduleWithRunLoop( 
-      device, CFRunLoopGetMain(), kCFRunLoopDefaultMode );
-    
-    properties.transport = IOHIDDeviceGetPropertyAsString( device, kIOHIDTransportKey );
-    properties.category = IOHIDDeviceGetPropertyAsString( device, kIOHIDCategoryKey );
-    properties.vendorId = IOHIDDeviceGetPropertyAsString( device, kIOHIDVendorIDKey );
-    properties.vendorIdSource = IOHIDDeviceGetPropertyAsString( device, kIOHIDVendorIDSourceKey );
-    properties.productId = IOHIDDeviceGetPropertyAsString( device, kIOHIDProductIDKey );
-    properties.versionNumber = IOHIDDeviceGetPropertyAsString( device, kIOHIDVersionNumberKey );
-    properties.manufacturer = IOHIDDeviceGetPropertyAsString( device, kIOHIDManufacturerKey );
-    properties.product = IOHIDDeviceGetPropertyAsString( device, kIOHIDProductKey );
-    properties.serialNumber = IOHIDDeviceGetPropertyAsString( device, kIOHIDSerialNumberKey );
-    properties.countryCode = IOHIDDeviceGetPropertyAsString( device, kIOHIDCountryCodeKey );
-    properties.standardType = IOHIDDeviceGetPropertyAsString( device, kIOHIDStandardTypeKey );
-    properties.locationId = IOHIDDeviceGetPropertyAsString( device, kIOHIDLocationIDKey );
-    
-    properties.page = IOHIDDeviceGetPropertyAsInt( device, kIOHIDDeviceUsagePageKey );
-    properties.usage = IOHIDDeviceGetPropertyAsInt( device, kIOHIDDeviceUsageKey );
-    
-    properties.print();
-    
-    readElements();
+    puts( "NULL device construction!" );
+    return;
   }
-  else puts( "NULL device construction!" );
+  
+  // Try to open the device
+  int options = kIOHIDOptionsTypeNone;// kIOHIDOptionsTypeSeizeDevice;
+  if( !ioCheck( IOHIDDeviceOpen( device, options ), "Device open" ) )
+    puts( "Device couldn't open" );
+  
+  readProperties();
+  readElements();
+  IOHIDDeviceScheduleWithRunLoop( device, CFRunLoopGetMain(), kCFRunLoopDefaultMode );
+  
+  
+  // debug out
+  puts( "======================" );
+  properties.print();
+  printf( "ELEMENT COLLECTIONS:\n    - %lu misc\n    - %lu buttons\n    - %lu axes\n"
+    "    - %lu scancodes\n    - %lu outputs\n    - %lu collections\n    - %lu features\n",
+    misc.size(), buttons.size(), axes.size(),
+    scancodes.size(), outputs.size(), collections.size(), features.size() );
+    
+  // Dump each collection
+  dumpCollection( "misc", misc );
+  dumpCollection( "buttons", buttons );
+  dumpCollection( "axes", axes );
+  dumpCollection( "scancodes", scancodes );
+  dumpCollection( "outputs", outputs );
+  dumpCollection( "collections", collections );
+  dumpCollection( "features", features );
+  puts( "----------------------" );
+}
+
+IODevice::~IODevice()
+{
+  IOHIDDeviceUnscheduleFromRunLoop( device, CFRunLoopGetMain(), kCFRunLoopDefaultMode );
+  IOHIDDeviceClose( device, kIOHIDOptionsTypeNone );
 }
 
 IODevice* IODevice::Make( IOHIDDeviceRef iDevice )
 {
+  if( !iDevice )
+  {
+    puts( "NULL device construction!" );
+    return 0;
+  }
+  
   // * may concrete type devices to IOMouse, IOKeyboard etc.
   // For now you just get a IODevice object.
-  IODevice* device = new IODevice( iDevice );
   // Depending on what type of device it is, construct
   // appropriate object type
   // Read some of the basic properties of the device.
-  return device;
+  return new IODevice( iDevice );
 }
   
-void IODevice::dumpCollection( string collName, vector<IOElement>& coll )
+void IODevice::dumpCollection( string collectionName, const vector<IOElement>& elts )
 {
-  printf( "IOElements in %s:\n", collName.c_str() );
+  printf( "IOElements in %s/%s:\n", properties.product.c_str(), collectionName.c_str() );
   // Dump each collection
-  for( int i = 0; i < coll.size(); i++ )
+  for( int i = 0; i < elts.size(); i++ )
   {
-    printf( "  - %s\n", coll[i].name.c_str() );
+    elts[i].properties.print();
   }
+}
+
+void IODevice::readProperties()
+{
+  properties.transport = IOHIDDeviceGetPropertyAsString( device, kIOHIDTransportKey );
+  properties.category = IOHIDDeviceGetPropertyAsString( device, kIOHIDCategoryKey );
+  properties.vendorId = IOHIDDeviceGetPropertyAsString( device, kIOHIDVendorIDKey );
+  properties.vendorIdSource = IOHIDDeviceGetPropertyAsString( device, kIOHIDVendorIDSourceKey );
+  properties.productId = IOHIDDeviceGetPropertyAsString( device, kIOHIDProductIDKey );
+  properties.versionNumber = IOHIDDeviceGetPropertyAsString( device, kIOHIDVersionNumberKey );
+  properties.manufacturer = IOHIDDeviceGetPropertyAsString( device, kIOHIDManufacturerKey );
+  properties.product = IOHIDDeviceGetPropertyAsString( device, kIOHIDProductKey );
+  properties.serialNumber = IOHIDDeviceGetPropertyAsString( device, kIOHIDSerialNumberKey );
+  properties.countryCode = IOHIDDeviceGetPropertyAsString( device, kIOHIDCountryCodeKey );
+  properties.standardType = IOHIDDeviceGetPropertyAsString( device, kIOHIDStandardTypeKey );
+  properties.locationId = IOHIDDeviceGetPropertyAsString( device, kIOHIDLocationIDKey );
+  
+  properties.page = IOHIDDeviceGetPropertyAsInt( device, kIOHIDDeviceUsagePageKey );
+  properties.usage = IOHIDDeviceGetPropertyAsInt( device, kIOHIDDeviceUsageKey );
 }
 
 void IODevice::readElements()
@@ -63,12 +100,12 @@ void IODevice::readElements()
   
   for( int i = 0; i < hidElts.size(); i++ )
   {
-    skipIfNot( hidElts[i] );
+    if( !hidElts[i] )  skip;
     IOElement elt( device, hidElts[i] ); // construct to classify
     
     // Wasn't determining device type.. categorize this elt so we could find it later
     // IOHIDElementType elemType = IOHIDElementGetType(elem);
-    switch(elt.type)
+    switch( elt.properties.type )
     {
       case kIOHIDElementTypeInput_Misc: //Misc input data field or varying size.
         misc.push_back( elt );
@@ -93,21 +130,6 @@ void IODevice::readElements()
         break;
     }
   }
-  
-  printf( "  - `%s` has\n"
-    "    - %lu misc\n    - %lu buttons\n    - %lu axes\n"
-    "    - %lu scancodes\n    - %lu outputs\n    - %lu collections\n    - %lu features\n",
-    properties.product.c_str(), misc.size(), buttons.size(), axes.size(),
-    scancodes.size(), outputs.size(), collections.size(), features.size() );
-    
-  // Dump each collection
-  //dumpCollection( "misc", misc );
-  //dumpCollection( "buttons", buttons );
-  //dumpCollection( "axes", axes );
-  //dumpCollection( "scancodes", scancodes );
-  //dumpCollection( "outputs", outputs );
-  //dumpCollection( "collections", collections );
-  //dumpCollection( "features", features );
 }
 
 void IODevice::check( vector<IOElement> & elts )
@@ -117,7 +139,7 @@ void IODevice::check( vector<IOElement> & elts )
   {
     IOElement& elt = elts[i];
     elt.update();
-    printf( "%3d ", elt.value );
+    printf( "%ld ", elt.value );
   }
 }
 
@@ -126,8 +148,8 @@ void IODevice::check()
   // Check all elts if they are active or not.
   // This is probably less efficient than reports.
   check( misc );  check( buttons );
-  //check( axes );
-  //check( scancodes );check( outputs );check( collections );check( features );
+  check( axes );
+  check( scancodes );check( outputs );check( collections );check( features );
 }
 
 

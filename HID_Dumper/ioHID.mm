@@ -1,23 +1,20 @@
 #include "ioHID.h"
 #include "cf.h"
 
-string IOHIDDeviceGetName( IOHIDDeviceRef device )
-{
-  return IOHIDDeviceGetPropertyAsString( device, kIOHIDProductKey );
-}
-
 CFTypeRef GetProperty( IOHIDDeviceRef device, const char* key )
 {
   // Key as a CFStringRef
   CFStringRef cfKey = CFStringCreateWithCString( kCFAllocatorDefault, key, kCFStringEncodingMacRoman );
   CFTypeRef cfProp = IOHIDDeviceGetProperty( device, cfKey );
+  CFRelease( cfKey );
+  //CFShow( cfProp );
+
   if( cfProp ) CFRetain( cfProp );
   else {
-    //string name = IOHIDDeviceGetName( device );
-    //printf( "Property %s is not in device %s\n", key, name.c_str() );
-    printf( "Property %s is not present\n", key );
+    //string name = IOHIDDeviceGetPropertyAsString( device, kIOHIDProductKey );
+    //printf( "Property %s is not in device `%s`\n", key, name.c_str() );
   }
-  CFRelease( cfKey );
+
   return cfProp;
 }
 
@@ -25,7 +22,6 @@ string IOHIDDeviceGetPropertyAsString( IOHIDDeviceRef device, const char* key )
 {
   CFTypeRef cfProp = GetProperty( device, key );
   if( !cfProp )  return "<< empty >>";
-  CFShow( cfProp );
   
   string str;
   // If the underlying type is a string type, just get it as a string
@@ -44,7 +40,6 @@ int IOHIDDeviceGetPropertyAsInt( IOHIDDeviceRef device, const char* key )
 {
   CFTypeRef cfProp = GetProperty( device, key );
   if( !cfProp )  return 0;
-  CFShow( cfProp );
   
   CFTypeID type = CFGetTypeID( cfProp );
   int num = 0;
@@ -142,7 +137,8 @@ map<int,string> ioPages = {
   { kHIDPage_Sport, "Sport" },
   { kHIDPage_Game, "Game" },
   { 0x06,"Reserved 0x06"},
-  { kHIDPage_KeyboardOrKeypad, "KeyboardOrKeypad // USB Device Class Definition for Human Interface Devices (HID)." }, // Note: the usage type for all key codes is Selector (Sel).
+  // Note: the usage type for all key codes is Selector (Sel).
+  { kHIDPage_KeyboardOrKeypad, "KeyboardOrKeypad" },
   { kHIDPage_LEDs, "LEDs" },
   { kHIDPage_Button, "Button" },
   { kHIDPage_Ordinal, "Ordinal" },
@@ -150,7 +146,7 @@ map<int,string> ioPages = {
   { kHIDPage_Consumer, "Consumer" },
   { kHIDPage_Digitizer, "Digitizer" },
   { 0x0E, "Reserved 0x0E" },
-  { kHIDPage_PID, "PID // USB Physical Interface Device definitions for force feedback and related devices." }, 
+  { kHIDPage_PID, "PID" }, 
   { kHIDPage_Unicode, "Unicode" },
   { 0x11, "Reserved 0x11" }, {0x12, "Reserved 0x12"}, {0x13, "Reserved 0x13"},
   { kHIDPage_AlphanumericDisplay, "Usage" },
@@ -162,9 +158,9 @@ map<int,string> ioPages = {
   { kHIDPage_PowerDevice, "PowerDevice // Power Device Page " },
   { kHIDPage_BatterySystem, "BatterySystem // Battery System Page" },
   // Reserved 0x88 - 0x8B
-  { kHIDPage_BarCodeScanner, "BarCodeScanner // (Point of Sale) USB Device Class Definition for Bar Code Scanner Devices" },
-  { kHIDPage_WeighingDevice, "WeighingDevice // (Point of Sale) USB Device Class Definition for Weighing Devices" },
-  { kHIDPage_Scale, "Scale // (Point of Sale) USB Device Class Definition for Scale Devices" },
+  { kHIDPage_BarCodeScanner, "BarCodeScanner" },
+  { kHIDPage_WeighingDevice, "WeighingDevice" },
+  { kHIDPage_Scale, "Scale" },
   { kHIDPage_MagneticStripeReader, "MagneticStripeReader" },
   // ReservedPointofSalepages 0x8
   { kHIDPage_CameraControl, "CameraControl" },    // USB Device Class Definition for Image Class Devices

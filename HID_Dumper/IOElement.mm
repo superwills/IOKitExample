@@ -5,13 +5,9 @@ void IOElement::defaults()
 {
   deviceOwner=0;
   elt=0;
-  type=(IOHIDElementType)0;
   
-  name=typeName="uninit";
-  page=usage=0;
-  logicalMin=logicalMax=0;
-  reportId=reportSize=0;
   value=0;
+  scaledValue=0.;
 }
 
 IOElement::IOElement()
@@ -26,58 +22,42 @@ IOElement::IOElement( IOHIDDeviceRef iOwner, IOHIDElementRef iElement )
   elt = iElement;
   if( !elt ) return;
   
-  // See http://www.gamedev.net/topic/620920-solved-mapping-problem-with-osx-gamepad-controls-via-hidmanager/
-  // unfortunately empty most of the time
-  name = CFStringGetAsString( IOHIDElementGetName( elt ) );
-  type = IOHIDElementGetType( elt );
-  typeName = ioElementTypes[type];
-  page = getPage();
-  usage = getUsage();
-  logicalMin = IOHIDElementGetLogicalMin( elt );
-  logicalMax = IOHIDElementGetLogicalMax( elt );
+  properties.name = CFStringGetAsString( IOHIDElementGetName( elt ) );
+  properties.type = IOHIDElementGetType( elt );
+  properties.typeName = ioElementTypes[ properties.type ];
+  
+  // The ELEMENT has the page, but the device doesn't seem to have it
+  // accurately much of the time..
+  properties.page = IOHIDElementGetUsagePage( elt );
+  properties.usage =  IOHIDElementGetUsage( elt );
+  properties.logicalMin = IOHIDElementGetLogicalMin( elt );
+  properties.logicalMax = IOHIDElementGetLogicalMax( elt );
   
   // tells you what report an elt will be included in
-  reportId = IOHIDElementGetReportID( elt );
+  properties.reportId = IOHIDElementGetReportID( elt );
   
   // how big the report is that the elt is a part of. redundant between
-  reportSize = IOHIDElementGetReportSize( elt );
+  properties.reportSize = IOHIDElementGetReportSize( elt );
   // elts that use the same reportId, but.
-  
-  // The first element in an HID device listing is usually the "PAGE".
-  // If you look in IOHIDUsageTables.h
-  // (or see http://www.usb.org/developers/devclass_docs/Hut1_11.pdf )
-  // basically you have WHAT THIS DEVICE IS MEANT TO BE USED FOR.
-  // When the "PAGE" is set to kHIDPage_GenericDesktop,
-  // the "USAGE" will be "WHAT THE DEVICE IS FOR REALLY",
-  // usually Mouse, Keyboard etc.
-  // Once you know the "USAGE", the OTHER elts 
-  if( page == kHIDPage_GenericDesktop )
-  {
-  }
-  else if( page == kHIDPage_KeyboardOrKeypad )
-  {
-    //printf( "KEYBOARD KEY report on page %d\n", IOHIDElementGetReportID(elt) );
-    printf( "A keyboard KEY, usage=%x, in report=%ld [%d]\n", usage, reportId, reportSize );
-  }
-  else if( page == kHIDPage_Button )
-  {
-    // It's some kind of BUTTON.
-    printf( "BUTTON, usage=%x in report=%ld [%d]\n", usage, reportId, reportSize );
-  }
-    
-  //IOHIDValueRef pValue;
-  //ioCheck( IOHIDDeviceGetValue( devices[i], elts[j], &pValue ), "getval" );
+}
+
+IOElement::~IOElement()
+{
   
 }
 
 void IOElement::update()
 {
-  if( !elt ) return;
+  if( !elt ) {
+    printf( "Error: Element %s is not initialized\n", properties.name.c_str() );
+    return;
+  }
   IOHIDValueRef vr = 0;
   IOHIDDeviceGetValue( deviceOwner, elt, &vr );
   if( vr )
   {
-    //double scaled=IOHIDValueGetScaledValue(valueRef,kIOHIDValueScaleTypePhysical);
-    value=(int)IOHIDValueGetIntegerValue(vr);
+    // fetching the value as FLOAT is allowed also,
+    value = IOHIDValueGetIntegerValue(vr);
+    scaledValue = IOHIDValueGetScaledValue( vr, kIOHIDValueScaleTypePhysical );
   }
 }

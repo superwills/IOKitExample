@@ -4,35 +4,40 @@
 HIDManager::HIDManager()
 {
   hid = IOHIDManagerCreate( kCFAllocatorDefault, kIOHIDOptionsTypeNone );
-  
   if( !hid )
   {
     puts( "ERROR: HID create failed" );
+    return;
   }
-  else
-  {
-    GetAllAvailableDevices();
-    // Schedule the hid to query with the run loop
-    IOHIDManagerScheduleWithRunLoop( hid,
-      CFRunLoopGetCurrent(),
-      kCFRunLoopDefaultMode );
-  }
+  
+  getAllAvailableDevices();
+  // Schedule the hid to query with the run loop
+  IOHIDManagerScheduleWithRunLoop( hid,
+    CFRunLoopGetCurrent(),
+    kCFRunLoopDefaultMode );
 }
 
-vector<IODevice*> HIDManager::GetAllAvailableDevices()
+HIDManager::~HIDManager()
+{
+  IOHIDManagerUnscheduleFromRunLoop( hid, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode );
+  for( int i = 0; i < devices.size(); i++ )
+    delete devices[i];
+  IOHIDManagerClose( hid, kIOHIDOptionsTypeNone );
+}
+
+void HIDManager::getAllAvailableDevices()
 {
   // Gets all AVAILABLE devices on the PC
   // https://developer.apple.com/reference/iokit/1438371-iohidmanagersetdevicematching?language=objc
   // "Passing a NULL dictionary will result in all devices being enumerated"
   IOHIDManagerSetDeviceMatching( hid, NULL );
   
-  // Opens devices specified in
-  // IOHIDManagerSetDeviceMatching() call above
+  // Opens devices specified in IOHIDManagerSetDeviceMatching() call above
   // kIOHIDOptionsTypeSeizeDevice
-  if( !ioCheck( IOHIDManagerOpen(
-    hid, kIOHIDOptionsTypeNone ), "IOHIDManagerOpen" ) )
+  if( !ioCheck( IOHIDManagerOpen( hid, kIOHIDOptionsTypeNone ), "IOHIDManagerOpen" ) )
   {
     puts( "ERROR: COULD NOT OPEN AN HID DEVICE" );
+    return;
   }
   
   // Copy constructed
@@ -41,7 +46,9 @@ vector<IODevice*> HIDManager::GetAllAvailableDevices()
   if( !deviceSet.set )
   {
     puts( "Couldn't copy devices (IOHIDManagerCopyDevices)" );
+    return;
   }
+  
   vector<IOHIDDeviceRef> deviceRefs = deviceSet.toVector();
   
   // Put the devices into IODevice object wrappers,
@@ -50,25 +57,10 @@ vector<IODevice*> HIDManager::GetAllAvailableDevices()
     // don't keep null devices or devices that won't open
     if( deviceRefs[i] )
     {
-      // Try to open the device
-      int options = 0;// kIOHIDOptionsTypeSeizeDevice;
-      if( ioCheck( IOHIDDeviceOpen( deviceRefs[i], options ), "Device open" ) )
-      {
-        IODevice* device = IODevice::Make( deviceRefs[i] );
+      IODevice* device = IODevice::Make( deviceRefs[i] );
+      if( device )
         devices.push_back( device );
-      }
-      else
-        printf( "  - Device `%s` by `%s` could not be opened\n",
-          IOHIDDeviceGetPropertyAsString(deviceRefs[i], kIOHIDProductKey).c_str(),
-          IOHIDDeviceGetPropertyAsString(deviceRefs[i], kIOHIDManufacturerKey).c_str() );
     }
   }
   
-  return devices;
 }
-
-HIDManager::~HIDManager()
-{
-  IOHIDManagerClose( hid, kIOHIDOptionsTypeNone );
-}
-

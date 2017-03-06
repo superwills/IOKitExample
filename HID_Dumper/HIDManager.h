@@ -16,8 +16,8 @@ struct HIDManager
   //IOGamepad gamepad;
   
   HIDManager();
-  vector<IODevice*> GetAllAvailableDevices();
   ~HIDManager();
+  void getAllAvailableDevices();
 };
 
 
