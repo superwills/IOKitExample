@@ -2,17 +2,21 @@
 #define IOElement_h
 
 #include "ioHID.h"
-#include "DeviceType.h"
 
+/// An IOElement is part of a device like a button or
+/// an axis.
 struct IOElement
 {
   IOHIDDeviceRef deviceOwner;  // Reference to the HID device this elt is part of.
   IOHIDElementRef elt;
-  IOHIDElementType type;        // one of misc,button,scancode,axis,collection,output,feature
+  IOHIDElementType type;       // one of misc,button,scancode,axis,collection,output,feature
   
   string name, typeName;
-  int page, usage; // page & usage of parent device is actually held in here in the elt.
-  DeviceTypes::Enum deviceType;
+  // page & usage of parent device is actually held in here in the elt.
+  // Each PAGE (KeyboardOrKeypad, Button..) has MANY
+  // USAGES (kHIDUsage_KeyboardA, kHIDUsage_KeyboardB..)
+  int page;   // kHIDPage_KeyboardOrKeypad, kHIDPage_Button
+  int usage;  // GenericDesktop Page: kHIDUsage_GD_Mouse, kHIDUsage_GD_GamePad
   CFIndex logicalMin, logicalMax, reportId;
   int reportSize;
   int value; // Last read value.

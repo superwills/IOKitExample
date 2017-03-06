@@ -18,18 +18,42 @@ string CFStringGetAsString( CFStringRef cfStr )
 {
   string buf;
   if( !cfStr ) return buf;
-  buf.resize( CFStringGetLength(cfStr)+1 );
-  CFStringGetCString( (CFStringRef)cfStr, &buf[0], buf.size(), kCFStringEncodingMacRoman);
+  long len = CFStringGetLength(cfStr);
+  buf.resize( len+1,0 );
+  if( !CFStringGetCString( (CFStringRef)cfStr,
+    &buf[0], buf.size(),
+    kCFStringEncodingMacRoman) )
+    puts( "Couldn't copy string" );
+  printf( "Str: %s\n", buf.c_str() );
   return buf;
 }
 
-string CFNumberGetAsString( CFNumberRef num )
+string CFNumberGetAsString( CFNumberRef cfNum )
 {
+  CFNumberRef floatVal = cfNum;
+
+  // if it's not a float type grab as INT then put into a float
+  if( CFNumberIsFloatType( cfNum ) )
+  {
+    CFRetain( floatVal ); // keep it and use it
+  }
+  else
+  {
+    float fv = (float)CFNumberGetAsInt( cfNum );
+    floatVal = CFNumberCreate( kCFAllocatorDefault, kCFNumberFloatType, (void*)&fv );
+  }
+  
+  CFShow( floatVal );
+  CFLocaleRef locale = CFLocaleCopyCurrent();
   CFNumberFormatterRef formatter = CFNumberFormatterCreate( 
-    kCFAllocatorDefault, CFLocaleCopyCurrent(), kCFNumberFormatterDecimalStyle );
-  CFStringRef cfStr = CFNumberFormatterCreateStringWithNumber( kCFAllocatorDefault, 
-    formatter, num );
+    kCFAllocatorDefault, locale, kCFNumberFormatterDecimalStyle );
+    
+  //!! This does not work if this is not a .mm file
+  CFStringRef cfStr = CFNumberFormatterCreateStringWithNumber(
+    kCFAllocatorDefault, formatter, floatVal );
   CFRelease( formatter );
+  CFRelease( locale );
+  CFRelease( floatVal );
   string s = CFStringGetAsString( cfStr );
   CFRelease( cfStr );
   return s;

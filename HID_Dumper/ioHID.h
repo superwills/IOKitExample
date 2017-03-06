@@ -10,7 +10,6 @@ using namespace std;
 
 string IOHIDDeviceGetPropertyAsString( IOHIDDeviceRef device, const char* key );
 int IOHIDDeviceGetPropertyAsInt( IOHIDDeviceRef device, const char* key );
-void printProp( IOHIDDeviceRef device, const char* key );
 
 bool ioCheck( IOReturn res, const char* msg );
 

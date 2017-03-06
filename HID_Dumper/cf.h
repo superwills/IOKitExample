@@ -172,7 +172,7 @@ template <typename T, typename S> struct CCFMutableDictionary
 
 string CFGetType( long typeId );
 string CFStringGetAsString( CFStringRef cfStr );
-string CFNumberGetAsString( CFNumberRef num );
+string CFNumberGetAsString( CFNumberRef cfNum );
 
 template <typename T> T CFNumberGetValue( CFNumberRef num )
 {

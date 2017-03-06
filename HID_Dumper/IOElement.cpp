@@ -1,4 +1,5 @@
 #include "IOElement.h"
+#include "cf.h"
 
 void IOElement::defaults()
 {
@@ -8,7 +9,6 @@ void IOElement::defaults()
   
   name=typeName="uninit";
   page=usage=0;
-  deviceType = DeviceTypes::Invalid;
   logicalMin=logicalMax=0;
   reportId=reportSize=0;
   value=0;
@@ -27,44 +27,32 @@ IOElement::IOElement( IOHIDDeviceRef iOwner, IOHIDElementRef iElement )
   if( !elt ) return;
   
   // See http://www.gamedev.net/topic/620920-solved-mapping-problem-with-osx-gamepad-controls-via-hidmanager/
-  name = CFStringGetAsString( IOHIDElementGetName( elt ) ); // unfortunately empty most of the time
+  // unfortunately empty most of the time
+  name = CFStringGetAsString( IOHIDElementGetName( elt ) );
   type = IOHIDElementGetType( elt );
   typeName = ioElementTypes[type];
   page = getPage();
   usage = getUsage();
-  logicalMin = IOHIDElementGetLogicalMin(elt);
-  logicalMax = IOHIDElementGetLogicalMax(elt);
-  reportId = IOHIDElementGetReportID( elt ); //tells you what report an elt will be included in
-  reportSize = IOHIDElementGetReportSize( elt ); // how big the report is that the elt is a part of. redundant between
+  logicalMin = IOHIDElementGetLogicalMin( elt );
+  logicalMax = IOHIDElementGetLogicalMax( elt );
+  
+  // tells you what report an elt will be included in
+  reportId = IOHIDElementGetReportID( elt );
+  
+  // how big the report is that the elt is a part of. redundant between
+  reportSize = IOHIDElementGetReportSize( elt );
   // elts that use the same reportId, but.
   
   // The first element in an HID device listing is usually the "PAGE".
-  // If you look in IOHIDUsageTables.h (or see http://www.usb.org/developers/devclass_docs/Hut1_11.pdf )
-  // basically you have WHAT THIS DEVICE IS MEANT TO BE USED FOR.  When the "PAGE" is
-  // set to kHIDPage_GenericDesktop, the "USAGE" will be "WHAT THE DEVICE IS FOR REALLY",
-  // usually Mouse, Keyboard etc.  Once you know the "USAGE", the OTHER elts 
+  // If you look in IOHIDUsageTables.h
+  // (or see http://www.usb.org/developers/devclass_docs/Hut1_11.pdf )
+  // basically you have WHAT THIS DEVICE IS MEANT TO BE USED FOR.
+  // When the "PAGE" is set to kHIDPage_GenericDesktop,
+  // the "USAGE" will be "WHAT THE DEVICE IS FOR REALLY",
+  // usually Mouse, Keyboard etc.
+  // Once you know the "USAGE", the OTHER elts 
   if( page == kHIDPage_GenericDesktop )
   {
-    switch(usage)
-    {
-      case kHIDUsage_GD_Mouse:
-        deviceType = DeviceTypes::Mouse;
-        break;
-      case kHIDUsage_GD_Keyboard:
-        deviceType = DeviceTypes::Keyboard;
-        break;
-      case kHIDUsage_GD_Joystick:
-        deviceType = DeviceTypes::Joystick;
-        break;
-      case kHIDUsage_GD_GamePad:
-        deviceType = DeviceTypes::Gamepad;
-        break;
-      default:
-        //none of the above
-        printf( "A <<generic desktop elt>>, typename=%s usage=%x, in report=%ld [%d]\n",
-               typeName.c_str(), usage, reportId, reportSize );
-        break;
-    }
   }
   else if( page == kHIDPage_KeyboardOrKeypad )
   {

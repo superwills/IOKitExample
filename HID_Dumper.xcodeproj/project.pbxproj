@@ -9,9 +9,8 @@
 /* Begin PBXBuildFile section */
 		97B7C2A417345F0100564D07 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B7C2A217345EEF00564D07 /* IOKit.framework */; };
 		97F7DE8717345E7D001DAEBC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F7DE8617345E7D001DAEBC /* CoreFoundation.framework */; };
-		97F7DE8A17345E7D001DAEBC /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 97F7DE8917345E7D001DAEBC /* main.cpp */; };
+		97F7DE8A17345E7D001DAEBC /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 97F7DE8917345E7D001DAEBC /* main.mm */; };
 		9F04CFC51E6BAC2A001835B2 /* HIDManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F04CFC41E6BAC2A001835B2 /* HIDManager.cpp */; };
-		9F04CFC91E6BAD6A001835B2 /* DeviceType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F04CFC71E6BAD6A001835B2 /* DeviceType.cpp */; };
 		9F04CFCC1E6BAD73001835B2 /* IOElement.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F04CFCA1E6BAD73001835B2 /* IOElement.cpp */; };
 		9F04CFCF1E6BAEDC001835B2 /* IODevice.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F04CFCD1E6BAEDC001835B2 /* IODevice.cpp */; };
 		9F268011190403B20048F0EC /* cf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9F268010190403B20048F0EC /* cf.cpp */; };
@@ -34,12 +33,10 @@
 		97B7C2A217345EEF00564D07 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		97F7DE8317345E7D001DAEBC /* HID_Dumper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HID_Dumper; sourceTree = BUILT_PRODUCTS_DIR; };
 		97F7DE8617345E7D001DAEBC /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		97F7DE8917345E7D001DAEBC /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		97F7DE8917345E7D001DAEBC /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		9F04CFC31E6BAC1C001835B2 /* HIDManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HIDManager.h; path = HID_Dumper/HIDManager.h; sourceTree = "<group>"; };
 		9F04CFC41E6BAC2A001835B2 /* HIDManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HIDManager.cpp; path = HID_Dumper/HIDManager.cpp; sourceTree = "<group>"; };
 		9F04CFC61E6BACE9001835B2 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
-		9F04CFC71E6BAD6A001835B2 /* DeviceType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DeviceType.cpp; path = HID_Dumper/DeviceType.cpp; sourceTree = "<group>"; };
-		9F04CFC81E6BAD6A001835B2 /* DeviceType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceType.h; path = HID_Dumper/DeviceType.h; sourceTree = "<group>"; };
 		9F04CFCA1E6BAD73001835B2 /* IOElement.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IOElement.cpp; path = HID_Dumper/IOElement.cpp; sourceTree = "<group>"; };
 		9F04CFCB1E6BAD73001835B2 /* IOElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOElement.h; path = HID_Dumper/IOElement.h; sourceTree = "<group>"; };
 		9F04CFCD1E6BAEDC001835B2 /* IODevice.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = IODevice.cpp; path = HID_Dumper/IODevice.cpp; sourceTree = "<group>"; };
@@ -96,7 +93,7 @@
 				9F268015190408050048F0EC /* util */,
 				9F04CFD01E6BAFFD001835B2 /* IODevice */,
 				9F04CFC61E6BACE9001835B2 /* main.h */,
-				97F7DE8917345E7D001DAEBC /* main.cpp */,
+				97F7DE8917345E7D001DAEBC /* main.mm */,
 				9FBAD593190579AC00DE933C /* notes.txt */,
 			);
 			path = HID_Dumper;
@@ -107,8 +104,6 @@
 			children = (
 				9F04CFC31E6BAC1C001835B2 /* HIDManager.h */,
 				9F04CFC41E6BAC2A001835B2 /* HIDManager.cpp */,
-				9F04CFC81E6BAD6A001835B2 /* DeviceType.h */,
-				9F04CFC71E6BAD6A001835B2 /* DeviceType.cpp */,
 				9F04CFCE1E6BAEDC001835B2 /* IODevice.h */,
 				9F04CFCD1E6BAEDC001835B2 /* IODevice.cpp */,
 				9F04CFCB1E6BAD73001835B2 /* IOElement.h */,
@@ -180,8 +175,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97F7DE8A17345E7D001DAEBC /* main.cpp in Sources */,
-				9F04CFC91E6BAD6A001835B2 /* DeviceType.cpp in Sources */,
+				97F7DE8A17345E7D001DAEBC /* main.mm in Sources */,
 				9F04CFCC1E6BAD73001835B2 /* IOElement.cpp in Sources */,
 				9F268014190406680048F0EC /* ioHID.cpp in Sources */,
 				9F268011190403B20048F0EC /* cf.cpp in Sources */,

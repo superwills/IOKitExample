@@ -1,52 +1,60 @@
 #include "ioHID.h"
 #include "cf.h"
 
+string IOHIDDeviceGetName( IOHIDDeviceRef device )
+{
+  return IOHIDDeviceGetPropertyAsString( device, kIOHIDProductKey );
+}
+
+CFTypeRef GetProperty( IOHIDDeviceRef device, const char* key )
+{
+  // Key as a CFStringRef
+  CFStringRef cfKey = CFStringCreateWithCString( kCFAllocatorDefault, key, kCFStringEncodingMacRoman );
+  CFTypeRef cfProp = IOHIDDeviceGetProperty( device, cfKey );
+  if( cfProp ) CFRetain( cfProp );
+  else {
+    //string name = IOHIDDeviceGetName( device );
+    //printf( "Property %s is not in device %s\n", key, name.c_str() );
+    printf( "Property %s is not present\n", key );
+  }
+  CFRelease( cfKey );
+  return cfProp;
+}
+
 string IOHIDDeviceGetPropertyAsString( IOHIDDeviceRef device, const char* key )
 {
-  CFStringRef cfKey = CFStringCreateWithCString( kCFAllocatorDefault, key, kCFStringEncodingMacRoman );
-  CFTypeRef prop = IOHIDDeviceGetProperty( device, cfKey );
-  CFRelease( cfKey );
-  if( !prop )  return "(null)";
+  CFTypeRef cfProp = GetProperty( device, key );
+  if( !cfProp )  return "<< empty >>";
+  CFShow( cfProp );
   
   string str;
-  
-  CFTypeID type = CFGetTypeID(prop);
+  // If the underlying type is a string type, just get it as a string
+  CFTypeID type = CFGetTypeID( cfProp );
   if( type == CFStringGetTypeID() )
-  {
-    str = CFStringGetAsString( (CFStringRef)prop );
-  }
+    str = CFStringGetAsString( (CFStringRef)cfProp );
   else if( type == CFNumberGetTypeID() )
-  {
-    str = CFNumberGetAsString( (CFNumberRef)prop );
-  }
+    str = CFNumberGetAsString( (CFNumberRef)cfProp );
   else
-  {
-    str.resize(40);
-    sprintf( &str[0], "CFTypeID==%s", CFGetType(type).c_str() );
-  }
-  
+    printf( "Err: Property %s is not a string (CFTypeID=%s)", key, CFGetType(type).c_str() );
+  CFRelease( cfProp );
   return str;
 }
 
 int IOHIDDeviceGetPropertyAsInt( IOHIDDeviceRef device, const char* key )
 {
-  CFStringRef cfKey = CFStringCreateWithCString( kCFAllocatorDefault, key, kCFStringEncodingMacRoman );
-  CFTypeRef prop = IOHIDDeviceGetProperty( device, cfKey );
-  CFRelease( cfKey );
-  if( !prop )  return 0;
+  CFTypeRef cfProp = GetProperty( device, key );
+  if( !cfProp )  return 0;
+  CFShow( cfProp );
   
-  CFTypeID type = CFGetTypeID(prop);
+  CFTypeID type = CFGetTypeID( cfProp );
+  int num = 0;
   if( type == CFNumberGetTypeID() )
-  {
-    return CFNumberGetAsInt((CFNumberRef)type);
-  }
-  
-  return 0;
-}
-
-void printProp( IOHIDDeviceRef device, const char* key )
-{
-  printf( "  - %s %s\n", key, IOHIDDeviceGetPropertyAsString( device, key ).c_str() );
+    num = CFNumberGetAsInt( (CFNumberRef)cfProp );
+  else
+    printf( "Err: Property %s is not an int (CFTypeID=%s)",
+      key, CFGetType(type).c_str() );
+  CFRelease( cfProp );
+  return num;
 }
 
 bool ioCheck( IOReturn res, const char* msg )

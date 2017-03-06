@@ -176,12 +176,11 @@ void gamepadCallback( void *context, IOReturn result, void *sender, IOHIDReportT
 
 void runLoopCallbacks_recommended( HIDManager& hid )
 {
-//  if( hid.mouse.
-  uint8_t *mouseReport = (uint8_t *)malloc( 6 );
-  IOHIDDeviceRegisterInputReportCallback(hid.mouse.device, mouseReport, 6, &mouseCallback, 0);
+  //uint8_t *mouseReport = (uint8_t *)malloc( 6 );
+  //IOHIDDeviceRegisterInputReportCallback(hid.mouse.device, mouseReport, 6, &mouseCallback, 0);
   
-  uint8_t *kbdReport = (uint8_t *)malloc( 8 );
-  IOHIDDeviceRegisterInputReportCallback(hid.kbd.device, kbdReport, 8, &kbdCallback, 0);
+  //uint8_t *kbdReport = (uint8_t *)malloc( 8 );
+  //IOHIDDeviceRegisterInputReportCallback(hid.kbd.device, kbdReport, 8, &kbdCallback, 0);
   
   ///uint8_t *gamepadReport = (uint8_t *)malloc( 64 );
   ///IOHIDDeviceRegisterInputReportCallback(hid.gamepad.dev, gamepadReport, 64, &gamepadCallback, 0);
@@ -190,8 +189,8 @@ void runLoopCallbacks_recommended( HIDManager& hid )
   puts( " *** PUSH ANY KEY OR MOVE THE MOUSE ***" );
   CFRunLoopRun(); // this will go on forever until the user quits the app
   
-  free( mouseReport );
-  free( kbdReport );
+  //free( mouseReport );
+  //free( kbdReport );
   //free( gamepadReport );
 }
 
@@ -208,44 +207,27 @@ void runLoopPolling_NotRecommended( HIDManager& hid )
 
     //hid.mouse.check();
     //hid.kbd.check();
-    hid.gamepad.check();
+    //hid.gamepad.check();
     
   }
 }
 
 int main( int argc, const char *	argv[] )
 {
+  SInt32 n = 11840;
+  CFNumberRef value = CFNumberCreate(NULL, kCFNumberSInt32Type, &n);
+  CFLocaleRef currentLocale = CFLocaleCopyCurrent();
+  CFNumberFormatterRef decimalFormatter = CFNumberFormatterCreate(
+    NULL, currentLocale, kCFNumberFormatterNoStyle);
+  CFStringRef cfStr = CFNumberFormatterCreateStringWithNumber(
+    NULL, decimalFormatter, value);
+  CFRelease( decimalFormatter );
+  CFRelease( currentLocale );
+  CFRelease( value );
+  printf( "value is `%s`\n", CFStringGetAsString( cfStr ).c_str() );
+  string s = CFStringGetAsString( cfStr );
+  CFRelease( cfStr );
 	HIDManager hid;
-  
-  // Let's query for available devices
-  
-  ////showAllDevices(hid);  return 0; // just dumps all device info
-  
-  vector<IODevice> devices = hid.open({
-    DeviceTypes::Mouse,
-    DeviceTypes::Keyboard,
-    DeviceTypes::Gamepad }
-  );
-  for( int i = 0; i < devices.size(); i++ )
-  {
-    IODevice& dev = devices[i];
-    if( dev.deviceType == DeviceTypes::Mouse )
-    {
-      //printf( "I found that %s is a mouse\n", dev.name.c_str() );
-      (IODevice&)hid.mouse = dev;
-      hid.mouse.findMouseElements();
-    }
-    else if( dev.deviceType == DeviceTypes::Keyboard )
-    {
-      //printf( "I found that %s is a Keyboard\n", dev.name.c_str() );
-      (IODevice&)hid.kbd = dev;
-    }
-    else if( dev.deviceType == DeviceTypes::Gamepad )
-    {
-      //printf( "I found that %s is a Gamepad\n", dev.name.c_str() );
-      (IODevice&)hid.gamepad = dev;
-    }
-  }
   
   // 1) Via inputreportcallbacks sent during CFRunLoopRun()
   runLoopCallbacks_recommended(hid);
