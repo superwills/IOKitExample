@@ -214,20 +214,7 @@ void runLoopPolling_NotRecommended( HIDManager& hid )
 
 int main( int argc, const char *	argv[] )
 {
-  SInt32 n = 11840;
-  CFNumberRef value = CFNumberCreate(NULL, kCFNumberSInt32Type, &n);
-  CFLocaleRef currentLocale = CFLocaleCopyCurrent();
-  CFNumberFormatterRef decimalFormatter = CFNumberFormatterCreate(
-    NULL, currentLocale, kCFNumberFormatterNoStyle);
-  CFStringRef cfStr = CFNumberFormatterCreateStringWithNumber(
-    NULL, decimalFormatter, value);
-  CFRelease( decimalFormatter );
-  CFRelease( currentLocale );
-  CFRelease( value );
-  printf( "value is `%s`\n", CFStringGetAsString( cfStr ).c_str() );
-  string s = CFStringGetAsString( cfStr );
-  CFRelease( cfStr );
-	HIDManager hid;
+  HIDManager hid;
   
   // 1) Via inputreportcallbacks sent during CFRunLoopRun()
   runLoopCallbacks_recommended(hid);

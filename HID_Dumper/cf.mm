@@ -30,30 +30,15 @@ string CFStringGetAsString( CFStringRef cfStr )
 
 string CFNumberGetAsString( CFNumberRef cfNum )
 {
-  CFNumberRef floatVal = cfNum;
-
-  // if it's not a float type grab as INT then put into a float
-  if( CFNumberIsFloatType( cfNum ) )
-  {
-    CFRetain( floatVal ); // keep it and use it
-  }
-  else
-  {
-    float fv = (float)CFNumberGetAsInt( cfNum );
-    floatVal = CFNumberCreate( kCFAllocatorDefault, kCFNumberFloatType, (void*)&fv );
-  }
-  
-  CFShow( floatVal );
   CFLocaleRef locale = CFLocaleCopyCurrent();
   CFNumberFormatterRef formatter = CFNumberFormatterCreate( 
     kCFAllocatorDefault, locale, kCFNumberFormatterDecimalStyle );
     
   //!! This does not work if this is not a .mm file
   CFStringRef cfStr = CFNumberFormatterCreateStringWithNumber(
-    kCFAllocatorDefault, formatter, floatVal );
+    kCFAllocatorDefault, formatter, cfNum );
   CFRelease( formatter );
   CFRelease( locale );
-  CFRelease( floatVal );
   string s = CFStringGetAsString( cfStr );
   CFRelease( cfStr );
   return s;
