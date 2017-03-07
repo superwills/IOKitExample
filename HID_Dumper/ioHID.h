@@ -13,8 +13,10 @@ int IOHIDDeviceGetPropertyAsInt( IOHIDDeviceRef device, const char* key );
 
 bool ioCheck( IOReturn res, const char* msg );
 
-extern map<IOReturn,string> ioErrors ;
+extern map<IOReturn,string> ioErrors;
 extern map<IOHIDElementType, string> ioElementTypes;
 extern map<int, string> ioPages;
+extern map<int, map<int, string> > ioUsages;
+extern vector<string> ioKeys;
 
 #endif

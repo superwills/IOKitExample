@@ -26,10 +26,11 @@ struct ElementProperties
   
   void print() const
   {
-    printf( "Element name=`%s`: type=%d [%s], page=%d [%s], usage=%d, "
+    printf( "Element name=`%s`: type=%d [%s], page=%d [%s], usage=%d [%s], "
       "logicalMin=%ld, logicalMax=%ld, reportId=%ld, reportSize=%d\n",
       name.c_str(), type, typeName.c_str(),
       page, ioPages[ page ].c_str(), usage,
+      ioUsages[ page ][ usage ].c_str(),
       logicalMin, logicalMax, reportId, reportSize );
   }
   
