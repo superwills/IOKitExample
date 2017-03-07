@@ -3,12 +3,12 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 #include <IOKit/hid/IOHIDKeys.h>
-#include <functional>
-using namespace std;
 
-typedef function< void ( void *context, IOReturn result, void *sender, IOHIDReportType type,
-  uint32_t reportID, uint8_t *reportValue, CFIndex reportLength ) > /*as simply*/ ReportCallback;
 
+void hidCallback( void *context, IOReturn result, void *sender, IOHIDReportType type,
+  uint32_t reportID, uint8_t *reportValue, CFIndex reportLength );
+
+// IOHIDReportCallback functions
 void mouseCallback( void *context, IOReturn result, void *sender, IOHIDReportType type,
   uint32_t reportID, uint8_t *reportValue, CFIndex reportLength );
 void kbdCallback( void *context, IOReturn result, void *sender, IOHIDReportType type, 

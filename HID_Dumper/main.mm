@@ -12,17 +12,16 @@ using namespace std;
 
 #include "Callbacks.h"
 
-int main( int argc, const char *	argv[] )
+int main( int argc, const char *argv[] )
 {
   HIDManager hid;
   
   //inputreportcallbacks sent during CFRunLoopRun()
-
-  for( int i = 0; i < hid.devices.size(); i++ )
+  for( pair< IOHIDDeviceRef, IODevice* > p : hid.devices )
   {
-    IODevice *device = hid.devices[i];
-    //uint8_t *report = (uint8_t *)malloc( device->properties.reportSize );
-    //IOHIDDeviceRegisterInputReportCallback( device, report, reportSize, &callback, 0 );
+    uint8_t *report = (uint8_t *)malloc( 8 );
+    IOHIDDeviceRegisterInputReportCallback( 
+      p.first, report, 8, hidCallback, 0 );
   }
   
   //uint8_t *kbdReport = (uint8_t *)malloc( 8 );

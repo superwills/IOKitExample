@@ -2,6 +2,7 @@
 #define HIDManager_h
 
 #include <vector>
+#include <map>
 using namespace std;
 
 #include "ioHID.h"
@@ -10,10 +11,8 @@ using namespace std;
 struct HIDManager
 {
   IOHIDManagerRef hid;
-  vector<IODevice*> devices;
-  //IOMouse mouse;
-  //IOKeyboard kbd;
-  //IOGamepad gamepad;
+  /// Device memory address references and device mappings...
+  map< IOHIDDeviceRef, IODevice* > devices;
   
   HIDManager();
   ~HIDManager();

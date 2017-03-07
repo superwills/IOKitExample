@@ -21,10 +21,10 @@ IODevice::IODevice( IOHIDDeviceRef iDevice ) :
   readElements();
   IOHIDDeviceScheduleWithRunLoop( device, CFRunLoopGetMain(), kCFRunLoopDefaultMode );
   
-  
   // debug out
   puts( "======================" );
-  properties.print();
+  for( pair<string,string> p : properties )
+    printf( "  - %s: %s\n", p.first.c_str(), p.second.c_str() );
   printf( "ELEMENT COLLECTIONS:\n    - %lu misc\n    - %lu buttons\n    - %lu axes\n"
     "    - %lu scancodes\n    - %lu outputs\n    - %lu collections\n    - %lu features\n",
     misc.size(), buttons.size(), axes.size(),
@@ -65,31 +65,17 @@ IODevice* IODevice::Make( IOHIDDeviceRef iDevice )
   
 void IODevice::dumpCollection( string collectionName, const vector<IOElement>& elts )
 {
-  printf( "IOElements in %s/%s:\n", properties.product.c_str(), collectionName.c_str() );
+  printf( "IOElements in %s/%s:\n",
+    properties[kIOHIDProductKey].c_str(), collectionName.c_str() );
   // Dump each collection
   for( int i = 0; i < elts.size(); i++ )
-  {
     elts[i].properties.print();
-  }
 }
 
 void IODevice::readProperties()
 {
-  properties.transport = IOHIDDeviceGetPropertyAsString( device, kIOHIDTransportKey );
-  properties.category = IOHIDDeviceGetPropertyAsString( device, kIOHIDCategoryKey );
-  properties.vendorId = IOHIDDeviceGetPropertyAsString( device, kIOHIDVendorIDKey );
-  properties.vendorIdSource = IOHIDDeviceGetPropertyAsString( device, kIOHIDVendorIDSourceKey );
-  properties.productId = IOHIDDeviceGetPropertyAsString( device, kIOHIDProductIDKey );
-  properties.versionNumber = IOHIDDeviceGetPropertyAsString( device, kIOHIDVersionNumberKey );
-  properties.manufacturer = IOHIDDeviceGetPropertyAsString( device, kIOHIDManufacturerKey );
-  properties.product = IOHIDDeviceGetPropertyAsString( device, kIOHIDProductKey );
-  properties.serialNumber = IOHIDDeviceGetPropertyAsString( device, kIOHIDSerialNumberKey );
-  properties.countryCode = IOHIDDeviceGetPropertyAsString( device, kIOHIDCountryCodeKey );
-  properties.standardType = IOHIDDeviceGetPropertyAsString( device, kIOHIDStandardTypeKey );
-  properties.locationId = IOHIDDeviceGetPropertyAsString( device, kIOHIDLocationIDKey );
-  
-  properties.page = IOHIDDeviceGetPropertyAsInt( device, kIOHIDDeviceUsagePageKey );
-  properties.usage = IOHIDDeviceGetPropertyAsInt( device, kIOHIDDeviceUsageKey );
+  for( string property : ioKeys )
+    properties[ property ] = IOHIDDeviceGetPropertyAsString( device, property );
 }
 
 void IODevice::readElements()

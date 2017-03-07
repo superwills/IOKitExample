@@ -20,8 +20,8 @@ HIDManager::HIDManager()
 HIDManager::~HIDManager()
 {
   IOHIDManagerUnscheduleFromRunLoop( hid, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode );
-  for( int i = 0; i < devices.size(); i++ )
-    delete devices[i];
+  for( pair< IOHIDDeviceRef, IODevice* > p : devices )
+    delete p.second;
   IOHIDManagerClose( hid, kIOHIDOptionsTypeNone );
 }
 
@@ -59,7 +59,7 @@ void HIDManager::getAllAvailableDevices()
     {
       IODevice* device = IODevice::Make( deviceRefs[i] );
       if( device )
-        devices.push_back( device );
+        devices[ deviceRefs[i] ] = device;
     }
   }
   

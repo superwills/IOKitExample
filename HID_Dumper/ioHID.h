@@ -8,8 +8,7 @@ using namespace std;
 #include <IOKit/hid/IOHIDLib.h>
 #include <IOKit/hid/IOHIDElement.h>
 
-string IOHIDDeviceGetPropertyAsString( IOHIDDeviceRef device, const char* key );
-int IOHIDDeviceGetPropertyAsInt( IOHIDDeviceRef device, const char* key );
+string IOHIDDeviceGetPropertyAsString( IOHIDDeviceRef device, string key );
 
 bool ioCheck( IOReturn res, const char* msg );
 

@@ -1,7 +1,13 @@
 #include "Callbacks.h"
-
 #include <IOKit/hid/IOHIDUsageTables.h>
 
+void hidCallback( void *context, IOReturn result, void *sender, IOHIDReportType type,
+  uint32_t reportID, uint8_t *reportValue, CFIndex reportLength )
+{
+  printf( "A callback context=%p result=%d sender=%p type=%d "
+    "reportID=%d reportValue=%d reportLen=%ld\n",
+    context, result, sender, type, reportID, *reportValue, reportLength );
+}
 
 /// REQUIRED: This only gets called from CFRunLoopRun(). 
 /// If you're not in CFRunLoopRun(), your callback will never get called.
