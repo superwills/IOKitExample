@@ -1,12 +1,23 @@
 #include "Callbacks.h"
+#include <IOKit/hid/IOHIDValue.h>
 #include <IOKit/hid/IOHIDUsageTables.h>
 
-void hidCallback( void *context, IOReturn result, void *sender, IOHIDReportType type,
+void hidInputReportCallback( void *context, IOReturn result, void *sender, IOHIDReportType type,
   uint32_t reportID, uint8_t *reportValue, CFIndex reportLength )
 {
+  // Every ELEMENT can send a REPORT.
   printf( "A callback context=%p result=%d sender=%p type=%d "
     "reportID=%d reportValue=%d reportLen=%ld\n",
     context, result, sender, type, reportID, *reportValue, reportLength );
+}
+
+void hidInputValueReportCallback( void * _Nullable context, IOReturn result,
+  void * _Nullable sender, IOHIDValueRef value )
+{
+  long intValue = IOHIDValueGetIntegerValue( value );
+  double scaledValue = IOHIDValueGetScaledValue( value, kIOHIDValueScaleTypePhysical );
+  printf( "A callback context=%p result=%d sender=%p value=%d floatVal=%f\n",
+    context, result, sender, intValue, scaledValue );
 }
 
 /// REQUIRED: This only gets called from CFRunLoopRun(). 

@@ -17,11 +17,12 @@ int main( int argc, const char *argv[] )
   HIDManager hid;
   
   //inputreportcallbacks sent during CFRunLoopRun()
+  vector<uint8_t> data( 64, 0 );
   for( pair< IOHIDDeviceRef, IODevice* > p : hid.devices )
   {
-    uint8_t *report = (uint8_t *)malloc( 8 );
-    IOHIDDeviceRegisterInputReportCallback( 
-      p.first, report, 8, hidCallback, 0 );
+    //IOHIDDeviceRegisterInputReportCallback( 
+    //  p.first, &data[0], data.size(), hidCallback, p.first );
+    IOHIDDeviceRegisterInputValueCallback( p.first, hidInputValueReportCallback, p.first );
   }
   
   //uint8_t *kbdReport = (uint8_t *)malloc( 8 );
