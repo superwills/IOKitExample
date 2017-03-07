@@ -12,6 +12,8 @@ IODevice::IODevice( IOHIDDeviceRef iDevice ) :
     return;
   }
   
+  buffer.resize( DEFAULT_BUFFER_SIZE, 0 );
+  
   // Try to open the device
   int options = kIOHIDOptionsTypeNone;// kIOHIDOptionsTypeSeizeDevice;
   if( !ioCheck( IOHIDDeviceOpen( device, options ), "Device open" ) )
@@ -22,6 +24,7 @@ IODevice::IODevice( IOHIDDeviceRef iDevice ) :
   IOHIDDeviceScheduleWithRunLoop( device, CFRunLoopGetMain(), kCFRunLoopDefaultMode );
   
   // debug out
+  /*
   puts( "======================" );
   for( pair<string,string> p : properties )
     printf( "  - %s: %s\n", p.first.c_str(), p.second.c_str() );
@@ -29,7 +32,7 @@ IODevice::IODevice( IOHIDDeviceRef iDevice ) :
     "    - %lu scancodes\n    - %lu outputs\n    - %lu collections\n    - %lu features\n",
     misc.size(), buttons.size(), axes.size(),
     scancodes.size(), outputs.size(), collections.size(), features.size() );
-    
+  
   // Dump each collection
   dumpCollection( "misc", misc );
   dumpCollection( "buttons", buttons );
@@ -39,6 +42,7 @@ IODevice::IODevice( IOHIDDeviceRef iDevice ) :
   dumpCollection( "collections", collections );
   dumpCollection( "features", features );
   puts( "----------------------" );
+  */
 }
 
 IODevice::~IODevice()

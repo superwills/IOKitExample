@@ -1,23 +1,46 @@
 #include "Callbacks.h"
+#include "cf.h"
+#include "ioHID.h"
+#include <IOKit/hid/IOHIDElement.h>
 #include <IOKit/hid/IOHIDValue.h>
 #include <IOKit/hid/IOHIDUsageTables.h>
+#include "HIDManager.h"
 
+// CONTEXT is a variable of your choice,
+// 
 void hidInputReportCallback( void *context, IOReturn result, void *sender, IOHIDReportType type,
   uint32_t reportID, uint8_t *reportValue, CFIndex reportLength )
 {
-  // Every ELEMENT can send a REPORT.
-  printf( "A callback context=%p result=%d sender=%p type=%d "
-    "reportID=%d reportValue=%d reportLen=%ld\n",
-    context, result, sender, type, reportID, *reportValue, reportLength );
+  HIDManager *hid = (HIDManager*)context;
+  IOHIDDeviceRef device = (IOHIDDeviceRef)sender;
+  
+  //printf( "InputReportCallback context=%p result=%d sender=%p type=%d "
+  //  "reportID=%d reportValue=%d reportLen=%ld\n",
+  //  context, result, sender, type, reportID, *reportValue, reportLength );
+  string name = IOHIDDeviceGetPropertyAsString( device, kIOHIDProductKey );
+  printf( "Device `%-22s`: ", name.c_str() );
+  for( int i = 0; i < reportLength; i++ )
+  {
+    printf( "[%02x] ", reportValue[i] );
+  }
+  printf("\r");
+  
 }
 
+// Key inputs.. like character entry.
 void hidInputValueReportCallback( void * _Nullable context, IOReturn result,
   void * _Nullable sender, IOHIDValueRef value )
 {
+  HIDManager *hid = (HIDManager*)context;
+  // From the value
+  IOHIDElementRef elt = IOHIDValueGetElement( value );
+  IOHIDDeviceRef dev = IOHIDElementGetDevice( elt ) ;
+  string eltName = CFStringGetAsString( IOHIDElementGetName( elt ) );
+  string deviceName = IOHIDDeviceGetPropertyAsString( dev, kIOHIDProductKey );
   long intValue = IOHIDValueGetIntegerValue( value );
   double scaledValue = IOHIDValueGetScaledValue( value, kIOHIDValueScaleTypePhysical );
-  printf( "A callback context=%p result=%d sender=%p value=%d floatVal=%f\n",
-    context, result, sender, intValue, scaledValue );
+  printf( "Device=%s, Element=%s ValueReportCallback context=%p result=%d sender=%p value=%ld floatVal=%f\n",
+    deviceName.c_str(), eltName.c_str(), context, result, sender, intValue, scaledValue );
 }
 
 /// REQUIRED: This only gets called from CFRunLoopRun(). 

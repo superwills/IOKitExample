@@ -10,7 +10,7 @@ CFTypeRef GetProperty( IOHIDDeviceRef device, string key )
   CFRelease( cfKey );
   //CFShow( cfProp );
 
-  if( cfProp ) CFRetain( cfProp );
+  if( cfProp )  CFRetain( cfProp );
   else {
     //string name = IOHIDDeviceGetPropertyAsString( device, kIOHIDProductKey );
     //printf( "Property %s is not in device `%s`\n", key, name.c_str() );

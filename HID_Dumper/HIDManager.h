@@ -19,6 +19,7 @@ struct HIDManager
   void getAllAvailableDevices();
 };
 
+extern HIDManager* hid;
 
 #endif
 

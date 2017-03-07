@@ -11,6 +11,11 @@ struct IODevice
   IOHIDDeviceRef device;
   map< string, string > properties;
   
+  /// GUESS a 64 byte report. The report buffer must
+  /// be greater than or equal to the size of the report.
+  const static int DEFAULT_BUFFER_SIZE = 64;
+  vector<uint8_t> buffer;  // Last report buffer
+  
   /// An IODevice has a given # of elements.
   vector<IOElement> misc, buttons, axes, 
     scancodes, outputs, collections, features;
@@ -23,7 +28,7 @@ struct IODevice
   // bang the device to tell if its working or not
   inline bool operator!(){ return !device; }
   
-  void dumpCollection( string collectionName, const vector<IOElement>& coll );
+  void dumpCollection( string collectionName, const vector<IOElement>& elts );
   void readProperties();
   void readElements();
   

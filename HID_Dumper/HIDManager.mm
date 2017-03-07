@@ -1,6 +1,8 @@
 #include "HIDManager.h"
 #include "cf.h"
 
+HIDManager* hid;
+
 HIDManager::HIDManager()
 {
   hid = IOHIDManagerCreate( kCFAllocatorDefault, kIOHIDOptionsTypeNone );
