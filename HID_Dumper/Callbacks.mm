@@ -28,8 +28,8 @@ void hidInputReportCallback( void *context, IOReturn result, void *sender, IOHID
 }
 
 // Key inputs.. like character entry.
-void hidInputValueReportCallback( void * _Nullable context, IOReturn result,
-  void * _Nullable sender, IOHIDValueRef value )
+void hidInputValueReportCallback( void * context, IOReturn result,
+  void * sender, IOHIDValueRef value )
 {
   HIDManager *hid = (HIDManager*)context;
   // From the value

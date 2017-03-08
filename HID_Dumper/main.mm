@@ -26,6 +26,7 @@ int main( int argc, const char *argv[] )
   // all elements.
   //IOHIDManagerRegisterInputValueCallback( hid->hid, hidInputValueReportCallback, 0 );
   //inputreportcallbacks sent during CFRunLoopRun()
+  /*
   for( pair< IOHIDDeviceRef, IODevice* > p : hid->devices )
   {
     // For reports of data from a device
@@ -37,7 +38,7 @@ int main( int argc, const char *argv[] )
     
     //IOHIDDeviceRegisterInputValueCallback( p.first, hidInputValueReportCallback, p.first );
   }
-  
+  */
   // runs until the user quits the app
   CFRunLoopRun();
   

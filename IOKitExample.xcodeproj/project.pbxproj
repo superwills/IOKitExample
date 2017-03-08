@@ -32,7 +32,7 @@
 
 /* Begin PBXFileReference section */
 		97B7C2A217345EEF00564D07 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
-		97F7DE8317345E7D001DAEBC /* HID_Dumper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = HID_Dumper; sourceTree = BUILT_PRODUCTS_DIR; };
+		97F7DE8317345E7D001DAEBC /* IOKitExample */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = IOKitExample; sourceTree = BUILT_PRODUCTS_DIR; };
 		97F7DE8617345E7D001DAEBC /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		97F7DE8917345E7D001DAEBC /* main.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		9F04CFC31E6BAC1C001835B2 /* HIDManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = HIDManager.h; path = HID_Dumper/HIDManager.h; sourceTree = "<group>"; };
@@ -75,7 +75,7 @@
 		97F7DE8417345E7D001DAEBC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				97F7DE8317345E7D001DAEBC /* HID_Dumper */,
+				97F7DE8317345E7D001DAEBC /* IOKitExample */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,9 +130,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		97F7DE8217345E7D001DAEBC /* HID_Dumper */ = {
+		97F7DE8217345E7D001DAEBC /* IOKitExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 97F7DE8F17345E7D001DAEBC /* Build configuration list for PBXNativeTarget "HID_Dumper" */;
+			buildConfigurationList = 97F7DE8F17345E7D001DAEBC /* Build configuration list for PBXNativeTarget "IOKitExample" */;
 			buildPhases = (
 				97F7DE7F17345E7D001DAEBC /* Sources */,
 				97F7DE8017345E7D001DAEBC /* Frameworks */,
@@ -142,9 +142,9 @@
 			);
 			dependencies = (
 			);
-			name = HID_Dumper;
+			name = IOKitExample;
 			productName = HID_Dumper;
-			productReference = 97F7DE8317345E7D001DAEBC /* HID_Dumper */;
+			productReference = 97F7DE8317345E7D001DAEBC /* IOKitExample */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -156,7 +156,7 @@
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Apple Inc.";
 			};
-			buildConfigurationList = 97F7DE7E17345E7D001DAEBC /* Build configuration list for PBXProject "HID_Dumper" */;
+			buildConfigurationList = 97F7DE7E17345E7D001DAEBC /* Build configuration list for PBXProject "IOKitExample" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -168,7 +168,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				97F7DE8217345E7D001DAEBC /* HID_Dumper */,
+				97F7DE8217345E7D001DAEBC /* IOKitExample */,
 			);
 		};
 /* End PBXProject section */
@@ -282,7 +282,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		97F7DE7E17345E7D001DAEBC /* Build configuration list for PBXProject "HID_Dumper" */ = {
+		97F7DE7E17345E7D001DAEBC /* Build configuration list for PBXProject "IOKitExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				97F7DE8D17345E7D001DAEBC /* Debug */,
@@ -291,7 +291,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		97F7DE8F17345E7D001DAEBC /* Build configuration list for PBXNativeTarget "HID_Dumper" */ = {
+		97F7DE8F17345E7D001DAEBC /* Build configuration list for PBXNativeTarget "IOKitExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				97F7DE9017345E7D001DAEBC /* Debug */,

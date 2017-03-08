@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "97F7DE8217345E7D001DAEBC"
-               BuildableName = "HID_Dumper"
-               BlueprintName = "HID_Dumper"
-               ReferencedContainer = "container:HID_Dumper.xcodeproj">
+               BuildableName = "IOKitExample"
+               BlueprintName = "IOKitExample"
+               ReferencedContainer = "container:IOKitExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "97F7DE8217345E7D001DAEBC"
-            BuildableName = "HID_Dumper"
-            BlueprintName = "HID_Dumper"
-            ReferencedContainer = "container:HID_Dumper.xcodeproj">
+            BuildableName = "IOKitExample"
+            BlueprintName = "IOKitExample"
+            ReferencedContainer = "container:IOKitExample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "97F7DE8217345E7D001DAEBC"
-            BuildableName = "HID_Dumper"
-            BlueprintName = "HID_Dumper"
-            ReferencedContainer = "container:HID_Dumper.xcodeproj">
+            BuildableName = "IOKitExample"
+            BlueprintName = "IOKitExample"
+            ReferencedContainer = "container:IOKitExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "97F7DE8217345E7D001DAEBC"
-            BuildableName = "HID_Dumper"
-            BlueprintName = "HID_Dumper"
-            ReferencedContainer = "container:HID_Dumper.xcodeproj">
+            BuildableName = "IOKitExample"
+            BlueprintName = "IOKitExample"
+            ReferencedContainer = "container:IOKitExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
