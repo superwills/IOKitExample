@@ -3,17 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		97B7C2A417345F0100564D07 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B7C2A217345EEF00564D07 /* IOKit.framework */; };
 		97F7DE8717345E7D001DAEBC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F7DE8617345E7D001DAEBC /* CoreFoundation.framework */; };
-		9F406F7C1E6F824400B6225B /* Callbacks.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F406F731E6F824400B6225B /* Callbacks.mm */; };
-		9F406F801E6F824400B6225B /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F406F7A1E6F824400B6225B /* main.mm */; };
-		9FBBC50D1E70DD75006B1233 /* cf.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FBBC5051E70DD75006B1233 /* cf.mm */; };
-		9FBBC50F1E70DD75006B1233 /* HIDManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FBBC5091E70DD75006B1233 /* HIDManager.mm */; };
-		9FBBC5101E70DD75006B1233 /* ioHID.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FBBC50B1E70DD75006B1233 /* ioHID.mm */; };
+		9FBAF6C51E71D482007170AD /* cf.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FBAF6C21E71D482007170AD /* cf.mm */; };
+		9FBAF6C61E71D482007170AD /* ioHID.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FBAF6C41E71D482007170AD /* ioHID.mm */; };
+		9FBAF6C81E71D4A9007170AD /* HIDManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F5EF5221E70E1160087EA81 /* HIDManager.mm */; };
+		9FBAF6C91E71D4AA007170AD /* Callbacks.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F406F731E6F824400B6225B /* Callbacks.mm */; };
+		9FBAF6CA1E71D4AA007170AD /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F406F7A1E6F824400B6225B /* main.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -36,12 +36,12 @@
 		9F406F731E6F824400B6225B /* Callbacks.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Callbacks.mm; path = IOKitExample/Callbacks.mm; sourceTree = SOURCE_ROOT; };
 		9F406F7A1E6F824400B6225B /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = IOKitExample/main.mm; sourceTree = SOURCE_ROOT; };
 		9F406F7B1E6F824400B6225B /* notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = notes.txt; path = IOKitExample/notes.txt; sourceTree = SOURCE_ROOT; };
-		9FBBC5041E70DD75006B1233 /* cf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cf.h; path = IOKitExample/cf.h; sourceTree = SOURCE_ROOT; };
-		9FBBC5051E70DD75006B1233 /* cf.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = cf.mm; path = IOKitExample/cf.mm; sourceTree = SOURCE_ROOT; };
-		9FBBC5081E70DD75006B1233 /* HIDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HIDManager.h; path = IOKitExample/HIDManager.h; sourceTree = SOURCE_ROOT; };
-		9FBBC5091E70DD75006B1233 /* HIDManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = HIDManager.mm; path = IOKitExample/HIDManager.mm; sourceTree = SOURCE_ROOT; };
-		9FBBC50A1E70DD75006B1233 /* ioHID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ioHID.h; path = IOKitExample/ioHID.h; sourceTree = SOURCE_ROOT; };
-		9FBBC50B1E70DD75006B1233 /* ioHID.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ioHID.mm; path = IOKitExample/ioHID.mm; sourceTree = SOURCE_ROOT; };
+		9F5EF5211E70E1160087EA81 /* HIDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HIDManager.h; path = IOKitExample/HIDManager.h; sourceTree = SOURCE_ROOT; };
+		9F5EF5221E70E1160087EA81 /* HIDManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = HIDManager.mm; path = IOKitExample/HIDManager.mm; sourceTree = SOURCE_ROOT; };
+		9FBAF6C11E71D482007170AD /* cf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cf.h; path = IOKitExample/util/cf.h; sourceTree = SOURCE_ROOT; };
+		9FBAF6C21E71D482007170AD /* cf.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = cf.mm; path = IOKitExample/util/cf.mm; sourceTree = SOURCE_ROOT; };
+		9FBAF6C31E71D482007170AD /* ioHID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ioHID.h; path = IOKitExample/util/ioHID.h; sourceTree = SOURCE_ROOT; };
+		9FBAF6C41E71D482007170AD /* ioHID.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ioHID.mm; path = IOKitExample/util/ioHID.mm; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,8 +86,9 @@
 		97F7DE8817345E7D001DAEBC /* IOKitExample */ = {
 			isa = PBXGroup;
 			children = (
-				9F268015190408050048F0EC /* util */,
-				9F04CFD01E6BAFFD001835B2 /* IODevice */,
+				9FBAF6C71E71D485007170AD /* util */,
+				9F5EF5211E70E1160087EA81 /* HIDManager.h */,
+				9F5EF5221E70E1160087EA81 /* HIDManager.mm */,
 				9F406F721E6F824400B6225B /* Callbacks.h */,
 				9F406F731E6F824400B6225B /* Callbacks.mm */,
 				9F406F7A1E6F824400B6225B /* main.mm */,
@@ -95,28 +96,17 @@
 			);
 			name = IOKitExample;
 			path = HID_Dumper;
-			sourceTree = "<group>";
+			sourceTree = SOURCE_ROOT;
 		};
-		9F04CFD01E6BAFFD001835B2 /* IODevice */ = {
+		9FBAF6C71E71D485007170AD /* util */ = {
 			isa = PBXGroup;
 			children = (
-				9FBBC5081E70DD75006B1233 /* HIDManager.h */,
-				9FBBC5091E70DD75006B1233 /* HIDManager.mm */,
-			);
-			name = IODevice;
-			path = IOKitExample/IODevice;
-			sourceTree = "<group>";
-		};
-		9F268015190408050048F0EC /* util */ = {
-			isa = PBXGroup;
-			children = (
-				9FBBC5041E70DD75006B1233 /* cf.h */,
-				9FBBC5051E70DD75006B1233 /* cf.mm */,
-				9FBBC50A1E70DD75006B1233 /* ioHID.h */,
-				9FBBC50B1E70DD75006B1233 /* ioHID.mm */,
+				9FBAF6C11E71D482007170AD /* cf.h */,
+				9FBAF6C21E71D482007170AD /* cf.mm */,
+				9FBAF6C31E71D482007170AD /* ioHID.h */,
+				9FBAF6C41E71D482007170AD /* ioHID.mm */,
 			);
 			name = util;
-			path = IOKitExample/util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,7 +139,7 @@
 				ORGANIZATIONNAME = "Apple Inc.";
 			};
 			buildConfigurationList = 97F7DE7E17345E7D001DAEBC /* Build configuration list for PBXProject "IOKitExample" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -170,11 +160,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FBBC50D1E70DD75006B1233 /* cf.mm in Sources */,
-				9F406F801E6F824400B6225B /* main.mm in Sources */,
-				9F406F7C1E6F824400B6225B /* Callbacks.mm in Sources */,
-				9FBBC50F1E70DD75006B1233 /* HIDManager.mm in Sources */,
-				9FBBC5101E70DD75006B1233 /* ioHID.mm in Sources */,
+				9FBAF6C81E71D4A9007170AD /* HIDManager.mm in Sources */,
+				9FBAF6C91E71D4AA007170AD /* Callbacks.mm in Sources */,
+				9FBAF6CA1E71D4AA007170AD /* main.mm in Sources */,
+				9FBAF6C51E71D482007170AD /* cf.mm in Sources */,
+				9FBAF6C61E71D482007170AD /* ioHID.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,14 +248,22 @@
 		97F7DE9017345E7D001DAEBC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = "";
+				INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 			};
 			name = Debug;
 		};
 		97F7DE9117345E7D001DAEBC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = "";
+				INCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "";
+				LIBRARY_SEARCH_PATHS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 			};
 			name = Release;
 		};

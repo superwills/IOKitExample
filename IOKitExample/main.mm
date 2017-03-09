@@ -4,7 +4,7 @@
 #include <string>
 using namespace std;
 
-#include "cf.h"
+#include "util/cf.h"
 #include "ioHID.h"
 
 #include "HIDManager.h"

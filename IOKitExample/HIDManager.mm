@@ -1,6 +1,5 @@
 #include "HIDManager.h"
-//#include <CoreFoundation/CoreFoundation.h>
-#include "cf.h"
+#include "util/cf.h"
 #include "ioHID.h"
 #include "Callbacks.h"
 
