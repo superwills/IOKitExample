@@ -47,6 +47,13 @@ string CFNumberGetAsString( CFNumberRef cfNum )
   return s;
 }
 
+string CFBooleanGetAsString( CFBooleanRef cfBool )
+{
+  Boolean val = CFBooleanGetValue( cfBool );
+  if( val ) return "True";
+  else return "False";
+}
+
 string CFDataGetAsString( CFDataRef cfData )
 {
   long dataSize = CFDataGetLength( cfData );
@@ -135,6 +142,8 @@ string CFGetAsString( CFTypeRef cfProp )
     str = CFStringGetAsString( (CFStringRef)cfProp );
   else if( type == CFNumberGetTypeID() )
     str = CFNumberGetAsString( (CFNumberRef)cfProp );
+  else if( type == CFBooleanGetTypeID() )
+    str = CFBooleanGetAsString( (CFBooleanRef)cfProp );
   else if( type == CFDataGetTypeID() )
     str = CFDataGetAsString( (CFDataRef)cfProp );
   else if( type == CFArrayGetTypeID() )
@@ -147,4 +156,16 @@ string CFGetAsString( CFTypeRef cfProp )
   }
   return str;
 }
+
+template <> string CFGet<string>( CFTypeRef cfProp )
+{
+  return CFStringGetAsString( (CFStringRef)cfProp );
+}
+template <> int CFGet<int>( CFTypeRef cfProp )
+{
+  return CFNumberGetAsInt( (CFNumberRef)cfProp );
+}
+
+
+
 

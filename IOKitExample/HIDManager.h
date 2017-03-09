@@ -2,20 +2,21 @@
 #define HIDManager_h
 
 #include <vector>
-#include <map>
 using namespace std;
 
 #include "ioHID.h"
-#include "IODevice.h"
 
 struct HIDManager
 {
   IOHIDManagerRef hid;
-  /// Device memory address references and device mappings...
-  map< IOHIDDeviceRef, IODevice* > devices;
+  vector< IOHIDDeviceRef > devices;
+  IOHIDOptionsType deviceOpenOptions;
   
   HIDManager();
   ~HIDManager();
+  string getDeviceType( IOHIDDeviceRef device );
+  void printDeviceInfo( IOHIDDeviceRef device );
+  void printDeviceElements( IOHIDDeviceRef device );
   void getAllAvailableDevices();
 };
 

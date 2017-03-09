@@ -1,5 +1,6 @@
 #ifndef IOHID_H
 #define IOHID_H
+
 #include <CoreFoundation/CoreFoundation.h>
 #include <map>
 #include <vector>
@@ -8,6 +9,7 @@ using namespace std;
 #include <IOKit/hid/IOHIDLib.h>
 #include <IOKit/hid/IOHIDElement.h>
 
+CFTypeRef GetProperty( IOHIDDeviceRef device, string key );
 string IOHIDDeviceGetPropertyAsString( IOHIDDeviceRef device, string key );
 
 bool ioCheck( IOReturn res, const char* msg );

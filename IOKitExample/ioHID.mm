@@ -145,11 +145,12 @@ map<int,string> ioPages = {
   { kHIDPage_VendorDefinedStart, "VendorDefinedStart" }, 
 };
 
-
+// PAGE => USAGES
 map<int, map<int,string> > ioUsages = {
   { kHIDPage_GenericDesktop, {
+    // EACH USAGE IS A SPECIFIC DEVICE __OR__ ELEMENT
     { kHIDUsage_GD_Pointer, "kHIDUsage_GD_Pointer" },
-    { kHIDUsage_GD_Mouse, "kHIDUsage_GD_Mouse" },
+    { kHIDUsage_GD_Mouse, "kHIDUsage_GD_Mouse" }, // Mouse DEVICE.
     { kHIDUsage_GD_Joystick, "kHIDUsage_GD_Joystick" },
     { kHIDUsage_GD_GamePad, "kHIDUsage_GD_GamePad" },
     { kHIDUsage_GD_Keyboard, "kHIDUsage_GD_Keyboard" },
@@ -157,7 +158,7 @@ map<int, map<int,string> > ioUsages = {
     { kHIDUsage_GD_MultiAxisController, "kHIDUsage_GD_MultiAxisController" },
     { kHIDUsage_GD_TabletPCSystemControls, "kHIDUsage_GD_TabletPCSystemControls" },
     { kHIDUsage_GD_AssistiveControl, "kHIDUsage_GD_AssistiveControl" },
-    { kHIDUsage_GD_X, "kHIDUsage_GD_X" },
+    { kHIDUsage_GD_X, "kHIDUsage_GD_X" }, // X-axis.
     { kHIDUsage_GD_Y, "kHIDUsage_GD_Y" },
     { kHIDUsage_GD_Z, "kHIDUsage_GD_Z" },
     { kHIDUsage_GD_Rx, "kHIDUsage_GD_Rx" },

@@ -5,6 +5,7 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <type_traits>
 using namespace std;
 
 #define skip continue
@@ -173,6 +174,7 @@ template <typename T, typename S> struct CCFMutableDictionary
 string CFGetType( long typeId );
 string CFStringGetAsString( CFStringRef cfStr );
 string CFNumberGetAsString( CFNumberRef cfNum );
+string CFBooleanGetAsString( CFBooleanRef cfBool );
 string CFDataGetAsString( CFDataRef cfData );
 string CFArrayGetAsString( CFArrayRef cfArray );
 string CFDictionaryGetAsString( CFDictionaryRef cfDict );
@@ -188,5 +190,7 @@ template <typename T> T CFNumberGetValue( CFNumberRef num )
 int CFNumberGetAsInt( CFNumberRef num );
 
 string CFGetAsString( CFTypeRef cfProp );
+
+template <typename T> T CFGet( CFTypeRef cfProp );
 
 #endif
