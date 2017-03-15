@@ -6,22 +6,22 @@ using namespace std;
 
 #include "DeviceUsage.h"
 #include "ioHID.h"
+#include "HIDDevice.h"
+
+#define CALLBACKS_ON 0
 
 struct HIDManager
 {
   IOHIDManagerRef hid;
-  vector< IOHIDDeviceRef > devices;
-  IOHIDOptionsType deviceOpenOptions;
+  int openOptions;
+  vector< HIDDevice* > devices;
   
-  HIDManager();
+  HIDManager( IOHIDOptionsType ioOptionsBits );
   ~HIDManager();
-  string getDeviceType( IOHIDDeviceRef device );
-  
-  /// Gets primary device usage from CFDictionary inside the properties.
-  DeviceUsage getDeviceUsage( IOHIDDeviceRef device );
-  void printDeviceInfo( IOHIDDeviceRef device );
-  void printDeviceElements( IOHIDDeviceRef device );
   void getAllAvailableDevices();
+  
+  
+
 };
 
 extern HIDManager* hid;

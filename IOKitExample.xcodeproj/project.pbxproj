@@ -16,6 +16,7 @@
 		9FBAF6C81E71D4A9007170AD /* HIDManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F5EF5221E70E1160087EA81 /* HIDManager.mm */; };
 		9FBAF6C91E71D4AA007170AD /* Callbacks.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F406F731E6F824400B6225B /* Callbacks.mm */; };
 		9FBAF6CA1E71D4AA007170AD /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F406F7A1E6F824400B6225B /* main.mm */; };
+		9FD33FD11E78C9B6006C6258 /* util.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FD33FCF1E78C9B6006C6258 /* util.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -48,6 +49,8 @@
 		9FBAF6C21E71D482007170AD /* cf.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = cf.mm; path = IOKitExample/util/cf.mm; sourceTree = SOURCE_ROOT; };
 		9FBAF6C31E71D482007170AD /* ioHID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ioHID.h; path = IOKitExample/util/ioHID.h; sourceTree = SOURCE_ROOT; };
 		9FBAF6C41E71D482007170AD /* ioHID.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = ioHID.mm; path = IOKitExample/util/ioHID.mm; sourceTree = SOURCE_ROOT; };
+		9FD33FCF1E78C9B6006C6258 /* util.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = util.mm; path = IOKitExample/util/util.mm; sourceTree = SOURCE_ROOT; };
+		9FD33FD01E78C9B6006C6258 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = util.h; path = IOKitExample/util/util.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +118,8 @@
 				9FBAF6C21E71D482007170AD /* cf.mm */,
 				9FBAF6C31E71D482007170AD /* ioHID.h */,
 				9FBAF6C41E71D482007170AD /* ioHID.mm */,
+				9FD33FD01E78C9B6006C6258 /* util.h */,
+				9FD33FCF1E78C9B6006C6258 /* util.mm */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				9FBAF6CA1E71D4AA007170AD /* main.mm in Sources */,
 				9FBAF6C51E71D482007170AD /* cf.mm in Sources */,
 				9FBAF6C61E71D482007170AD /* ioHID.mm in Sources */,
+				9FD33FD11E78C9B6006C6258 /* util.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,4 +1,5 @@
 #include <CoreFoundation/CoreFoundation.h>
+#include <Foundation/Foundation.h>
 #include <map>
 #include <vector>
 #include <string>
@@ -13,7 +14,7 @@ using namespace std;
 
 int main( int argc, const char *argv[] )
 {
-  hid = new HIDManager();
+  hid = new HIDManager( kIOHIDOptionsTypeNone );
   
   // runs until the user quits the app
   CFRunLoopRun();
