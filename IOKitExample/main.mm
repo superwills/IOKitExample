@@ -17,6 +17,8 @@ int main( int argc, const char *argv[] )
   
   // runs until the user quits the app
   CFRunLoopRun();
+  
+  return 0;
 }
 
 

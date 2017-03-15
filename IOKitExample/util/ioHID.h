@@ -6,8 +6,9 @@
 #include <vector>
 #include <string>
 using namespace std;
-#include <IOKit/hid/IOHIDLib.h>
+#include <IOKit/hid/IOHIDDevice.h>
 #include <IOKit/hid/IOHIDElement.h>
+#include <IOKit/hid/IOHIDLib.h>
 
 CFTypeRef GetProperty( IOHIDDeviceRef device, string key );
 string IOHIDDeviceGetPropertyAsString( IOHIDDeviceRef device, string key );

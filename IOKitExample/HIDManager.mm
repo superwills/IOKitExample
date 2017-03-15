@@ -18,12 +18,14 @@ HIDManager::HIDManager()
   getAllAvailableDevices();
 
   IOHIDManagerRegisterInputReportCallback( hid, hidInputReportCallback, 0 );
-  IOHIDManagerScheduleWithRunLoop( hid, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode );
+  //IOHIDManagerRegisterInputValueCallback( hid, hidInputValueReportCallback, 0 ) ;
+  
+  IOHIDManagerScheduleWithRunLoop( hid, CFRunLoopGetMain(), kCFRunLoopDefaultMode );
 }
 
 HIDManager::~HIDManager()
 {
-  IOHIDManagerUnscheduleFromRunLoop( hid, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode );
+  IOHIDManagerUnscheduleFromRunLoop( hid, CFRunLoopGetMain(), kCFRunLoopDefaultMode );
   for( IOHIDDeviceRef device : devices ) {
     IOHIDDeviceUnscheduleFromRunLoop( device, CFRunLoopGetMain(), kCFRunLoopDefaultMode );
     IOHIDDeviceClose( device, deviceOpenOptions );
@@ -87,7 +89,7 @@ void HIDManager::printDeviceInfo( IOHIDDeviceRef device )
   string deviceName = IOHIDDeviceGetPropertyAsString( device, kIOHIDProductKey );
   printf( "DEVICE=%s, TYPE=%s\n", deviceName.c_str(), getDeviceType( device ).c_str() );
   
-  /*
+  ///*
   puts( "Properties:" );
   for( string property : ioKeys )
   {
@@ -95,8 +97,11 @@ void HIDManager::printDeviceInfo( IOHIDDeviceRef device )
     printf( "  - %s: %s\n", property.c_str(), value.c_str() );
   }
   
-  printDeviceElements( device );
-  */
+  CFTypeRef reportDescriptor = GetProperty( device, kIOHIDReportDescriptorKey );
+  CFRelease( reportDescriptor );
+  
+  //printDeviceElements( device );
+  //*/
   puts( "----------------------" );
 }
 
@@ -128,6 +133,9 @@ void HIDManager::printDeviceElements( IOHIDDeviceRef device )
     
     // tells you what report an elt will be included in
     uint32_t reportId = IOHIDElementGetReportID( elt );
+    
+    
+    IOHIDElementCookie cookie = IOHIDElementGetCookie( elt );
     
     // how big the report is that the elt is a part of. redundant between
     uint32_t reportSize = IOHIDElementGetReportSize( elt );

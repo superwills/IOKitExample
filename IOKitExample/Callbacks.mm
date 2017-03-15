@@ -11,6 +11,7 @@ void hidInputReportCallback( void *context, IOReturn result, void *sender, IOHID
   uint32_t reportID, uint8_t *reportValue, CFIndex reportLength )
 {
   IOHIDDeviceRef device = (IOHIDDeviceRef)sender;
+  // Check which device it is
   
   //printf( "InputReportCallback context=%p result=%d sender=%p type=%d "
   //  "reportID=%d reportValue=%d reportLen=%ld\n",
@@ -19,7 +20,7 @@ void hidInputReportCallback( void *context, IOReturn result, void *sender, IOHID
   printf( "Device `%-22s`: ", name.c_str() );
   for( int i = 0; i < reportLength; i++ )
     printf( "[%02x] ", reportValue[i] );
-  printf("\r");
+  printf("\n");
   
   printf("\nM: ");
   for( int i = 0 ; i < reportLength; i++ )
@@ -45,6 +46,13 @@ void hidInputValueReportCallback( void * context, IOReturn result,
   double scaledValue = IOHIDValueGetScaledValue( value, kIOHIDValueScaleTypePhysical );
   printf( "Device=%s, Element=%s ValueReportCallback context=%p result=%d sender=%p value=%ld floatVal=%f\n",
     deviceName.c_str(), eltName.c_str(), context, result, sender, intValue, scaledValue );
+
+  if( IOHIDElementGetUsage( elt ) == kHIDUsage_KeyboardEscape )
+  {
+    // Quit the application
+    puts( "Exiting" );
+    CFRunLoopStop( CFRunLoopGetMain() );
+  }
 }
 
 void kbdCallback( void *context, IOReturn result, void *sender, IOHIDReportType type, 

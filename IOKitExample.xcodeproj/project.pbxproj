@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		97B7C2A417345F0100564D07 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97B7C2A217345EEF00564D07 /* IOKit.framework */; };
 		97F7DE8717345E7D001DAEBC /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 97F7DE8617345E7D001DAEBC /* CoreFoundation.framework */; };
+		9F14B4C01E733282006DD5E1 /* HIDDevice.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F14B4BE1E733282006DD5E1 /* HIDDevice.mm */; };
+		9F25E75D1E74DE2D0058DB86 /* DeviceUsage.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F25E75B1E74DE2D0058DB86 /* DeviceUsage.mm */; };
 		9FBAF6C51E71D482007170AD /* cf.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FBAF6C21E71D482007170AD /* cf.mm */; };
 		9FBAF6C61E71D482007170AD /* ioHID.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9FBAF6C41E71D482007170AD /* ioHID.mm */; };
 		9FBAF6C81E71D4A9007170AD /* HIDManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9F5EF5221E70E1160087EA81 /* HIDManager.mm */; };
@@ -32,6 +34,10 @@
 		97B7C2A217345EEF00564D07 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		97F7DE8317345E7D001DAEBC /* IOKitExample */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = IOKitExample; sourceTree = BUILT_PRODUCTS_DIR; };
 		97F7DE8617345E7D001DAEBC /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		9F14B4BE1E733282006DD5E1 /* HIDDevice.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = HIDDevice.mm; path = IOKitExample/HIDDevice.mm; sourceTree = SOURCE_ROOT; };
+		9F14B4BF1E733282006DD5E1 /* HIDDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HIDDevice.h; path = IOKitExample/HIDDevice.h; sourceTree = SOURCE_ROOT; };
+		9F25E75B1E74DE2D0058DB86 /* DeviceUsage.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DeviceUsage.mm; path = IOKitExample/DeviceUsage.mm; sourceTree = SOURCE_ROOT; };
+		9F25E75C1E74DE2D0058DB86 /* DeviceUsage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceUsage.h; path = IOKitExample/DeviceUsage.h; sourceTree = SOURCE_ROOT; };
 		9F406F721E6F824400B6225B /* Callbacks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Callbacks.h; path = IOKitExample/Callbacks.h; sourceTree = SOURCE_ROOT; };
 		9F406F731E6F824400B6225B /* Callbacks.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Callbacks.mm; path = IOKitExample/Callbacks.mm; sourceTree = SOURCE_ROOT; };
 		9F406F7A1E6F824400B6225B /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = main.mm; path = IOKitExample/main.mm; sourceTree = SOURCE_ROOT; };
@@ -87,6 +93,10 @@
 			isa = PBXGroup;
 			children = (
 				9FBAF6C71E71D485007170AD /* util */,
+				9F25E75C1E74DE2D0058DB86 /* DeviceUsage.h */,
+				9F25E75B1E74DE2D0058DB86 /* DeviceUsage.mm */,
+				9F14B4BF1E733282006DD5E1 /* HIDDevice.h */,
+				9F14B4BE1E733282006DD5E1 /* HIDDevice.mm */,
 				9F5EF5211E70E1160087EA81 /* HIDManager.h */,
 				9F5EF5221E70E1160087EA81 /* HIDManager.mm */,
 				9F406F721E6F824400B6225B /* Callbacks.h */,
@@ -160,7 +170,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F25E75D1E74DE2D0058DB86 /* DeviceUsage.mm in Sources */,
 				9FBAF6C81E71D4A9007170AD /* HIDManager.mm in Sources */,
+				9F14B4C01E733282006DD5E1 /* HIDDevice.mm in Sources */,
 				9FBAF6C91E71D4AA007170AD /* Callbacks.mm in Sources */,
 				9FBAF6CA1E71D4AA007170AD /* main.mm in Sources */,
 				9FBAF6C51E71D482007170AD /* cf.mm in Sources */,

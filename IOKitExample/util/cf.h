@@ -174,6 +174,7 @@ string CFGetType( long typeId );
 string CFStringGetAsString( CFStringRef cfStr );
 string CFNumberGetAsString( CFNumberRef cfNum );
 string CFBooleanGetAsString( CFBooleanRef cfBool );
+vector<UInt8> CFDataGetData( CFDataRef cfData );
 string CFDataGetAsString( CFDataRef cfData );
 string CFArrayGetAsString( CFArrayRef cfArray );
 string CFDictionaryGetAsString( CFDictionaryRef cfDict );

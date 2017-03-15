@@ -54,14 +54,29 @@ string CFBooleanGetAsString( CFBooleanRef cfBool )
   else return "False";
 }
 
-string CFDataGetAsString( CFDataRef cfData )
+vector<UInt8> CFDataGetData( CFDataRef cfData )
 {
   long dataSize = CFDataGetLength( cfData );
-  CFRange cfRange = CFRangeMake(0, dataSize);
-  string buf;
-  buf.resize( dataSize+1, 0 );
-  CFDataGetBytes( cfData, cfRange, (UInt8*)&buf[0] );
+  vector<UInt8> buf( dataSize, 0 );
+  CFRange cfRange = CFRangeMake( 0, dataSize );
+  CFDataGetBytes( cfData, cfRange, &buf[0] );
   return buf;
+}
+
+string CFDataGetAsString( CFDataRef cfData )
+{
+  vector<UInt8> buf = CFDataGetData( cfData );
+  
+  string str;
+  char num[80];
+  for( int i = 0; i < buf.size(); i++ )
+  {
+    sprintf( num, "%02x", buf[i] );
+    str += string( num );
+    if( i%2 ) str += "\n";
+    else str += " ";
+  }
+  return str;
 }
 
 string CFArrayGetAsString( CFArrayRef cfArray )
