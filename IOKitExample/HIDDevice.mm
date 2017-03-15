@@ -52,6 +52,8 @@ void HIDDevice::getDeviceDetails()
     vector<UInt8> reportDescriptor = CFDataGetData( cfReportDescriptor );
     CFRelease( cfReportDescriptor );
     ReadReportDescriptor( reportDescriptor );
+    for( DeviceUsage usage : deviceUsages )
+      usage.print();
   }
 }
 
@@ -193,7 +195,7 @@ void HIDDevice::ReadReportDescriptor( const vector<UInt8>& reportDescriptor )
   {
     byteSize = reportDescriptor[i] & MASK_NN;
     int flag = reportDescriptor[i] & ~MASK_NN;
-    printf( "GOT %d, flag=%d, byteSize=%d", reportDescriptor[i], flag, byteSize );
+    //printf( "GOT %d, flag=%d, byteSize=%d", reportDescriptor[i], flag, byteSize );
     //if( !byteSize )  skip; // 0 byte field, no data (0xc0)
     
     short value = 0;
@@ -207,44 +209,72 @@ void HIDDevice::ReadReportDescriptor( const vector<UInt8>& reportDescriptor )
       else
         error( "The reportDescriptor doesn't have enough space for a short" );
     }
-    else
-      error( "byteSize field had unexpected size %d", byteSize );
       
-    printf( " VALUE=%d\n", value );
+    //printf( " VALUE=%d\n", value );
     switch( flag )
     {
       // Found usage page
-      case kUsagePage:    printf( "kUsagePage %d\n", value ); 
+      case kUsagePage:
+        printf( "kUsagePage %d\n", value ); 
         currentUsage.page = value;
         break;
-      case kLogicalMin:   currentUsage.logicalMin = value;
+      case kLogicalMin:
+        printf( "logicalMin %d\n", value ); 
+        currentUsage.logicalMin = value;
         break;
-      case kLogicalMax:   currentUsage.logicalMax = value;    break;
-      case kPhysicalMin:  currentUsage.physicalMin = value;   break;
-      case kPhysicalMax:  currentUsage.physicalMax = value;   break;
-      case kUnitExponent: puts( "NOTE: Skipped kUnitExponent" );  break;
-      case kUnit:         puts( "NOTE: Skipped kUnit" );      break;
-      case kReportSize:   currentUsage.reportSizeBits = value;break;
-      case kReportID:     currentUsage.reportID = value;      break;
-      case kReportCount:  reportCount = value;                break;
-      case kPush:         puts( "NOTE: Skipped kPush" );      break;
-      case kPop:          puts( "NOTE: Skipped kPop" );       break;
+      case kLogicalMax:
+        printf( "logicalMax %d\n", value ); 
+        currentUsage.logicalMax = value;
+        break;
+      case kPhysicalMin:
+        printf( "physicalMin %d\n", value ); 
+        currentUsage.physicalMin = value;
+        break;
+      case kPhysicalMax:
+        printf( "physicalMax %d\n", value ); 
+        currentUsage.physicalMax = value; 
+        break;
+      case kUnitExponent:     puts( "NOTE: Skipped kUnitExponent" );    break;
+      case kUnit:             puts( "NOTE: Skipped kUnit" );            break;
+      case kReportSize:
+        printf( "reportSizeBits %d\n", value ); 
+        currentUsage.reportSizeBits = value;
+        break;
+      case kReportID:
+        printf( "reportID %d\n", value ); 
+        currentUsage.reportID = value;
+        break;
+      case kReportCount:
+        printf( "reportCount %d\n", value ); 
+        reportCount = value;
+        break;
+      case kPush:             puts( "NOTE: Skipped kPush" );            break;
+      case kPop:              puts( "NOTE: Skipped kPop" );             break;
         
-      case kUsage:     currentUsage.usage = value;  break;
-      case kUsageMin:  usageMin = value;            break;
-      case kUsageMax:  usageMax = value;            break;
-      case kDesignatorIndex:  puts( "NOTE: Skipped kDesignatorIndex" );  break;
-      case kDesignatorMin:  puts( "NOTE: Skipped kDesignatorMin" );  break;
-      case kDesignatorMax:  puts( "NOTE: Skipped kDesignatorMax" );  break;
-      case kStringIndex:  puts( "NOTE: Skipped kStringIndex" );  break;
-      case kStringMin:  puts( "NOTE: Skipped kStringMin" );  break;
-      case kStringMax:  puts( "NOTE: Skipped kStringMax" );  break;
-      case kDelimiter:  puts( "NOTE: Skipped kDelimiter" );  break;
+      case kUsage:
+        printf( "usage %d\n", value ); 
+        usageMin = usageMax = currentUsage.usage = value;
+        break;
+      case kUsageMin:
+        printf( "usageMin %d\n", value ); 
+        usageMin = value;
+        break;
+      case kUsageMax:
+        printf( "usageMax %d\n", value ); 
+        usageMax = value;
+        break;
+      case kDesignatorIndex:  puts( "NOTE: Skipped kDesignatorIndex" ); break;
+      case kDesignatorMin:    puts( "NOTE: Skipped kDesignatorMin" );   break;
+      case kDesignatorMax:    puts( "NOTE: Skipped kDesignatorMax" );   break;
+      case kStringIndex:      puts( "NOTE: Skipped kStringIndex" );     break;
+      case kStringMin:        puts( "NOTE: Skipped kStringMin" );       break;
+      case kStringMax:        puts( "NOTE: Skipped kStringMax" );       break;
+      case kDelimiter:        puts( "NOTE: Skipped kDelimiter" );       break;
         
       case kInput:
         // create (usageMax-usageMin) usages
-        puts( "INPUT:" );
-        if( usageMax - usageMin != reportCount )
+        printf( "INPUT %d\n", value ); 
+        if( usageMax - usageMin + 1 != reportCount )
         {
           error( "Error: reportCount=%d, usageMin=%d, usageMax=%d\n", reportCount, usageMin, usageMax );
         }
@@ -256,10 +286,10 @@ void HIDDevice::ReadReportDescriptor( const vector<UInt8>& reportDescriptor )
           currentUsage.print();
           deviceUsages.push_back( currentUsage );
         }
-      case kOutput:         puts( "NOTE: Skipped kOutput" );  break;
-      case kFeature:        puts( "NOTE: Skipped kFeature" );  break;
-      case kCollection:     puts( "NOTE: Skipped kCollection" );  break;
-      case kEndCollection:  puts( "NOTE: Skipped kEndCollection" );  break;
+      case kOutput:         puts( "NOTE: Skipped kOutput" );        break;
+      case kFeature:        puts( "NOTE: Skipped kFeature" );       break;
+      case kCollection:     puts( "NOTE: Skipped kCollection" );    break;
+      case kEndCollection:  puts( "NOTE: Skipped kEndCollection" ); break;
     }
     
   }
